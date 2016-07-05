@@ -1,0 +1,96 @@
+
+*** SMALLER TASKS ***
+
+** Wave Management **
++waves are placed in the scene and are selectable
+  +selecting a wave opens the wave editor. Each wave consists of the following:
+    -wave number
+    +list of sub-waves
+      +each sub-wave consists of:
+        -enemy type (template)
+        -path (path instance)
+        -number to spawn
+        -delay between spawns
+        -delay before first spawn
+    -gold dropped by enemies (total gold for wave)
+    -gems dropped by enemies (total gems for wave)
++when a wave is selected in the editor, the spawn locations and paths are shown
++when a wave is not selected, only the wave icon and number are shown in the scene view
+
+** Multi-Player **
++how do I deal with multiple local players?
++how do I deal with network clients?
+
+
+*** OVERALL PLAN ***
+
+** Stage 1 - The basic game **
+Art  : Placeholder
+Code : The barebones game should be there
+
++player can be moved around
++there are monsters that follow paths to the house
++there are towers that attack the monsters
+
+
+** Stage 2 - Networking **
+Art  : Placeholder
+Code : Multiplayer should be in
+
++up to 4 players can join a multiplayer game
++can play any mix of local or network players
+  -4 local
+  -2 local, 2 network
+  -3 local, 1 network
+  -1 local, 3 network
+
+  
+** Foundation **
+Art  : Placeholder
+Code : Should be cleaned up
+	   The core game should be expanded
+	   
++the existing codebase should be cleaned up before expansion
++utility classes and functions should be added where needed
++the game should be expanded slightly
+  -the game keeps track of money, gems, score, etc.
+  -monsters spawn in waves
+  -towers can be built by players (press button at tree to build set type)
+  
+  
+** Expansion 1 **
+Art  : Placeholder
+Code : Core game expanded (focus towers and menus)
+
++more tower types
++a menu to enable selection of tower types
++a menu to sell or upgrade towers
++a menu to research towers
+
+
+** Expansion 2 **
+Art  : Placeholder
+Code : Core game expanded (focus monsters and items)
+
++monsters drop items when killed
++more monsters types
++monsters with shields
+
+
+** Stage Design and First Testing **
+Art  : Placeholder
+Code : Not expanded unless necessary
+
++Concentrate on making a handful of stages to test the gameplay
++Test and take feedback
+
+
+** Initial Art **
+Art  : Preliminary
+Code : Focus on supporting new assets
+
++build important assets first
+  -player
+  -towers
+  -monsters
++make sure that code enables easily animating new assets without much custom code per object

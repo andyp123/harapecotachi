@@ -1,0 +1,26 @@
+{
+  "folders":
+  [
+    {
+      "path": "Assets",
+      "file_exclude_patterns": ["*.meta"],
+      "binary_file_patterns": ["*.png", "*.fbx"],
+    },
+    {
+      "path": ".",
+      "folder_exclude_patterns": ["*"],
+      "file_include_patterns": [
+        "*.sublime-project",
+        ".gitignore",
+        "README.md",
+      ],
+    },    
+  ],
+  "settings":
+  {
+    "tab_size": 2,
+    "translate_tabs_to_spaces": true,
+    "detect_indentation": true,
+    "default_line_ending": "system",
+  }
+}
