@@ -17,7 +17,14 @@ public class PathMover : MonoBehaviour
         _distance = _path.Length;
         
       Vector3 pos = _path.GetPositionAtDistance(_distance);
+      Vector3 prevPos = transform.position;
       transform.position = pos;
+
+      if (pos != prevPos)
+      {
+        Vector3 dir = pos - prevPos;
+        transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
+      }
     }
   }
 }
