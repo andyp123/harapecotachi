@@ -18,8 +18,13 @@ public class PathEditor : Editor
     _prevTool = Tools.current;
     Tools.current = Tool.None;
 
-    // hide default transform in inspector
-     _path.transform.hideFlags = HideFlags.HideInInspector;
+    if (_path != null)
+    {
+      _path.EditorInitialize();
+
+      // hide default transform in inspector
+      _path.transform.hideFlags = HideFlags.HideInInspector;
+    }
   }
 
   void OnDisable()
@@ -57,6 +62,8 @@ public class PathEditor : Editor
   void DrawHandle(int index)
   {
     Handles.color = (index == _selectedPointIndex) ? Color.yellow : Color.white;
+    if (index == 0 && index != _selectedPointIndex)
+      Handles.color = Color.red;
 
     Vector3 point = _path.GetPoint(index);
     float size = HandleUtility.GetHandleSize(point) * _handleScale;
@@ -89,6 +96,8 @@ public class PathEditor : Editor
   {
     Path path = target as Path;
 
+    path.Tension = EditorGUILayout.Slider("Tension", path.Tension, -1f, 1f);
+
     if (GUILayout.Button("Add Point"))
     {
       Undo.RecordObject(path, "add path point");
@@ -120,7 +129,7 @@ public class PathEditor : Editor
       }
     }
 
-    // if (GUI.changed)
-    //   EditorUtility.SetDirty(path);
+    if (GUI.changed)
+      EditorUtility.SetDirty(path);
   }
 }

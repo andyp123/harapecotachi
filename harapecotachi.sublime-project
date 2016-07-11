@@ -7,6 +7,9 @@
       "binary_file_patterns": ["*.png", "*.fbx"],
     },
     {
+      "path": "Documentation",
+    },
+    {
       "path": ".",
       "folder_exclude_patterns": ["*"],
       "file_include_patterns": [
