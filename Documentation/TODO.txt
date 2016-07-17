@@ -1,3 +1,43 @@
+// CURRENT PLAN
+
+Current key tasks:
++ towers can detect enemies
++ towers can attack enemies
+  - enemies have health and can be damaged
++ enemies can be spawned in waves
++ a stage can have multiple waves
+
+
+side goals:
++ paths can be converted into single array of evenly subdivided nodes
+  - point position
+  - point rotation
+  - distance at point
++ stages can be saved as json files
++ develop simple ui for stage editing in game
+  - place and modify paths
+  - place objects, player start, house etc.
+  - add waves, with multiple sub waves (spawn from different locations during same wave)
+  - set timings
+  - set item drops etc.
+
+
+points to think about:
++ art direction
++ background story (simple but endearing and should motivate players)
++ gameplay ideas (more than just "it should play kinda like PixelJunk Monsters")
+  - monster/tower ideas and balance
+  - thoughts about menus
+  - items
+  - levelling up
+  - limitations on tower building (place on trees, marked tiles etc?)
++ is the camera fixed, or does it pan and zoom?
++ obstacles in the level - rocks, plants, cliffs, water
++ environment/planet types
+  - desert, swamp, forest, ice, beach, rocky
++ should there be network multiplayer? (yes, but how realistic is it)
+
+// OLD PLAN BELOW!
 
 *** SMALLER TASKS ***
 
