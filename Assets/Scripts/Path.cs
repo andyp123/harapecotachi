@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public class Path : MonoBehaviour
 {
-  [HideInInspector][SerializeField]
+  [SerializeField]
   private List<Vector3> _points;
+  [SerializeField]
+  private float _tension = 0f;
   private float _length = 0f;
-  private float _tension = -0.5f;
   private bool _lengthValid = false;
 
-  // there should be one distance table per segment, not point!
   private List<DistanceTable> _distanceTables;
 
   public float Tension
@@ -19,7 +19,7 @@ public class Path : MonoBehaviour
     set
     {
       _tension = Mathf.Clamp(value, -1f, 1f);
-      _lengthValid = false;
+      InvalidateAllDistanceTables();
     }
   }
   public float Length
@@ -216,6 +216,16 @@ public class Path : MonoBehaviour
     // invalidate previous connected segment
     if ( invalidatePrev && segmentIndex > 0)
       _distanceTables[segmentIndex - 1].Invalidate();
+
+    _lengthValid = false;
+  }
+
+  private void InvalidateAllDistanceTables ()
+  {
+    foreach (DistanceTable dt in _distanceTables)
+    {
+      dt.Invalidate();
+    }
 
     _lengthValid = false;
   }

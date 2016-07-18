@@ -85,7 +85,7 @@ public class PathEditor : Editor
       point = Handles.DoPositionHandle(point, Quaternion.identity);
       if (EditorGUI.EndChangeCheck())
       {
-        Undo.RecordObject(_path, "move path point");
+        Undo.RecordObject(_path, "Move Path Point");
         _path.SetPoint(index, point);
         EditorUtility.SetDirty(_path);
       }
@@ -96,11 +96,18 @@ public class PathEditor : Editor
   {
     Path path = target as Path;
 
-    path.Tension = EditorGUILayout.Slider("Tension", path.Tension, -1f, 1f);
+
+    float tension = EditorGUILayout.Slider("Tension", path.Tension, -1f, 1f);
+    if (tension != path.Tension)
+    {
+      Undo.RecordObject(path, "Change Path Tension");
+      path.Tension = tension;
+      EditorUtility.SetDirty(path);
+    }
 
     if (GUILayout.Button("Add Point"))
     {
-      Undo.RecordObject(path, "add path point");
+      Undo.RecordObject(path, "Add Path Point");
       path.AddPoint(Vector3.zero);
       EditorUtility.SetDirty(path);
 
@@ -113,14 +120,14 @@ public class PathEditor : Editor
       Vector3 newPoint = EditorGUILayout.Vector3Field("Selected Point (" + _selectedPointIndex + ")", oldPoint);
       if (oldPoint != newPoint)
       {
-        Undo.RecordObject(path, "move path point");
+        Undo.RecordObject(path, "Move Path Point");
         path.SetPoint(_selectedPointIndex, newPoint);
         EditorUtility.SetDirty(path);
       }
 
       if (GUILayout.Button("Remove Selected Point"))
       {
-        Undo.RecordObject(path, "remove path point");
+        Undo.RecordObject(path, "Remove Path Point");
         path.RemovePoint(_selectedPointIndex);
         EditorUtility.SetDirty(path);
 
@@ -129,7 +136,7 @@ public class PathEditor : Editor
       }
     }
 
-    if (GUI.changed)
-      EditorUtility.SetDirty(path);
+    // if (GUI.changed)
+    //   EditorUtility.SetDirty(path);
   }
 }
