@@ -8,6 +8,12 @@ public class PathMover : MonoBehaviour
 
   private float _distance = 0f;
 
+  void Start ()
+  {
+    if (_path != null)
+      transform.position = _path.GetPositionAtDistance(0f);
+  }
+
   void Update ()
   {
     if (_path != null)
@@ -26,5 +32,12 @@ public class PathMover : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
       }
     }
+  }
+
+  public bool AtPathEnd ()
+  {
+    if (_path != null)
+      return (_distance >= _path.Length);
+    return false;
   }
 }
