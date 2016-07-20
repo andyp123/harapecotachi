@@ -43,6 +43,8 @@ public class PathMover : MonoBehaviour
       float distance = _distance + _speed * time;
       return _path.GetPositionAtDistance(distance);
     }
+
+    return Vector3.zero;
   }
 
   public bool AtPathEnd ()

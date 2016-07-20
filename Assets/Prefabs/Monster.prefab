@@ -155,7 +155,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _path: {fileID: 0}
   _speed: 2
-  _distance: 0
 --- !u!114 &11449702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,7 +178,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 5
-  _healthMax: 0
 --- !u!114 &11497710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,8 +189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d2c712471872442b70519037faad04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pathMover: {fileID: 0}
-  _damage: {fileID: 0}
 --- !u!136 &13600250
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -200,7 +196,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173638}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.35
   m_Height: 1.5
