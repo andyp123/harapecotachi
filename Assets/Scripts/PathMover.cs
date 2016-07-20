@@ -26,11 +26,22 @@ public class PathMover : MonoBehaviour
       Vector3 prevPos = transform.position;
       transform.position = pos;
 
+      // rotation really should be set by a _path.GetRotationAtDistance function
       if (pos != prevPos)
       {
         Vector3 dir = pos - prevPos;
         transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
       }
+    }
+  }
+
+  // for predicting where a monster will be so towers can shoot them accurately
+  public Vector3 GetPositionAfterTime (float time)
+  {
+    if (_path != null)
+    {
+      float distance = _distance + _speed * time;
+      return _path.GetPositionAtDistance(distance);
     }
   }
 

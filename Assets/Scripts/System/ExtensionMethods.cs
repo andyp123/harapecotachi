@@ -17,7 +17,7 @@ public static class ExtensionMethods
     return result;
   }
 
-  // replacement for transform root for when objects are grouped under another gameobject.
+  // Replacement for transform root for when objects are grouped under another gameobject.
   // Requires TransformRoot component (which can be an empty monobehaviour named TransformRoot)
   static public GameObject FindRoot(this GameObject gameObject)
   {
