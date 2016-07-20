@@ -1,0 +1,49 @@
+I would like to serialize LevelData into a simple json format that can be easily read, and modified by hand.
+This document contains snippets of how the LevelData object should be stored. Note that Unity's json doesn't
+support dictionaries, so I'm trying to keep everything in simple object or array formats.
+
+Using json also means that I should be able to do small naming changes easily using a text editor, where a
+binary format would just break.
+
+{
+  // level data / header info
+  "levelInfo": {},
+  "paths": [],
+  "waves": [],
+  // objects (note that objects are used in different ways, some might be deco, others important gameplay items, so maybe this should be broken up?)
+  "objects": [],
+}
+
+
+{
+  "id": "level1",
+  "level_details": {
+
+    "info": "big invasion from 3 sides",
+  },
+  "paths": [
+    {
+      "points": [
+        {0.5, 0, 5},
+        {2, 0, 5},
+        {3, 0, 6},
+      ],
+      "tension": -0.5,
+    },
+    {
+
+    },
+  ],
+  "waves": [
+  
+  ],
+  "objects": [
+    {
+      "prefab": "TREE_GREEN_1"
+      "position": {0, 0, 0},
+      "rotation": {0, 54, 0},
+      "scale": {1, 1, 1}
+    }
+  ],
+  
+}

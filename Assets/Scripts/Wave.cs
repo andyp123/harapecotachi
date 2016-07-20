@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public class Wave : MonoBehaviour
 {
   public string _monsterType = ""; // monster type to spawn
