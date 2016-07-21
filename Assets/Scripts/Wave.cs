@@ -4,6 +4,14 @@ using System.Collections;
 [System.Serializable]
 public class Wave : MonoBehaviour
 {
+  public enum WaveState
+  {
+    ready,
+    spawning,
+    finished
+  };
+
+  public int _groupID = 1; // used by the wave manager to group waves
   public string _monsterType = ""; // monster type to spawn
   public int _spawnCount = 10; // number of monsters in the wave
   public float _startDelay = 0f; // delay before first monster is spawned
@@ -12,6 +20,12 @@ public class Wave : MonoBehaviour
 
   // quick hack for now
   public InstancedObjectManager _objectManager;
+
+  private WaveState _state = WaveState.ready;
+  public WaveState State
+  {
+    get { return _state; }
+  }
 
 
   void Start ()
@@ -22,6 +36,7 @@ public class Wave : MonoBehaviour
 
   IEnumerator SpawnMonsters ()
   {
+    _state = WaveState.spawning;
     yield return new WaitForSeconds(_startDelay);
 
     for (int i = 0; i < _spawnCount; ++i)
@@ -35,5 +50,6 @@ public class Wave : MonoBehaviour
       }
       yield return new WaitForSeconds(_spawnDelay);
     }
+    _state = WaveState.finished;
   }
 }

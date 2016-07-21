@@ -45,8 +45,6 @@ public class Sensor : MonoBehaviour
 
   void OnTriggerEnter (Collider other)
   {
-    Debug.Log("trigger enter");
-
     GameObject go = other.gameObject.FindRoot();
     int uid = go.GetInstanceID();
     _targets.Add(uid, go);
