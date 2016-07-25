@@ -2,12 +2,12 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections;
 
-[CustomEditor (typeof(Sensor))]
+[CustomEditor (typeof(CapsuleSensor))]
 public class SensorEditor : Editor
 {
   public override void OnInspectorGUI()
   {
-    Sensor sensor = target as Sensor;
+    CapsuleSensor sensor = target as CapsuleSensor;
 
     float radius = EditorGUILayout.FloatField("Sensor Radius", sensor.SensorRadius);
     if (radius != sensor.SensorRadius)

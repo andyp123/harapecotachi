@@ -4,9 +4,12 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
   public float _moveSpeed = 5f;
+  public Sensor _objectPlacementSensor;
 
-  void Start ()
+  void Awake ()
   {
+    if (_objectPlacementSensor == null)
+      Debug.LogError("No Object Placement Node Sensor on player");
   }
   
   void Update ()
@@ -20,6 +23,27 @@ public class Player : MonoBehaviour
     if (moveDir.sqrMagnitude > 0f)
     {
       transform.rotation = Quaternion.LookRotation(moveDir);
+    }
+
+    if (Input.GetButtonDown("Fire1"))
+    {
+      TryBuild();
+    }
+  }
+
+  void TryBuild()
+  {
+    Debug.Log("trying to build");
+    GameObject nearest = _objectPlacementSensor.GetNearestTarget();
+    if (nearest != null)
+    {
+      ObjectPlacementNode node = nearest.GetComponent<ObjectPlacementNode>();
+      if (node != null && !node._occupied)
+      {
+        // build tower at node
+        Debug.Log("building!");
+        node._occupied = true;
+      }
     }
   }
 }

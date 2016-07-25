@@ -15,10 +15,10 @@ TagManager:
   - 
   - MonsterCollider
   - TowerSensor
-  - 
-  - 
-  - 
-  - 
+  - PlayerCollider
+  - PlayerSensor
+  - ObjectInfoNode
+  - ItemCollider
   - 
   - 
   - 

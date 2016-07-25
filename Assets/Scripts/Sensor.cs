@@ -2,45 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Collider))]
 public class Sensor : MonoBehaviour
 {
-  [SerializeField]
-  private float _sensorRadius = 1f;
-  private float _sensorHeight = 10f;
   private Dictionary<int, GameObject> _targets;
 
-  public float SensorRadius
-  {
-    get { return _sensorRadius; }
-    set {
-      if (value > 0f)
-      {
-        _sensorRadius = value;
-        SetColliderSize();
-      }
-    }
-  }
+
+  protected virtual void SetColliderSize () {} // only used by CapsuleSensor
 
   void Awake ()
   {
     _targets = new Dictionary<int, GameObject>();
-
     SetColliderSize();
   }
 
   void Update ()
   {
     CleanInvalidTargets();
-  }
-
-  // this sets the capsule collider's size so that it can be used more like a cylinder collider
-  protected void SetColliderSize ()
-  {
-    CapsuleCollider cc = gameObject.GetComponent<CapsuleCollider>();
-    cc.center = new Vector3(0f, _sensorHeight * 0.5f, 0f);
-    cc.height = _sensorHeight + _sensorRadius * 2f;
-    cc.radius = _sensorRadius;
   }
 
   void OnTriggerEnter (Collider other)
@@ -75,7 +53,7 @@ public class Sensor : MonoBehaviour
   public GameObject GetNearestTarget ()
   {
     GameObject nearestTarget = null;
-    float nearestDistanceSqr = _sensorRadius * _sensorRadius + 100f;
+    float nearestDistanceSqr = 9999999f;
 
     foreach (var key in _targets.Keys)
     {
