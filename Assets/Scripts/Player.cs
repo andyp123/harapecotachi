@@ -33,7 +33,6 @@ public class Player : MonoBehaviour
 
   void TryBuild()
   {
-    Debug.Log("trying to build");
     GameObject nearest = _objectPlacementSensor.GetNearestTarget();
     if (nearest != null)
     {
@@ -41,10 +40,13 @@ public class Player : MonoBehaviour
       if (node != null && !node._occupied)
       {
         // build tower at node
-        Debug.Log("building!");
         Transform nt = node.transform;
         GameManager.Instance.InstantiatePrefab("TEST_TOWER_1", nt.position, nt.rotation);
         node._occupied = true;
+      }
+      else
+      {
+        Debug.Log("can't build tower at node.");
       }
     }
   }
