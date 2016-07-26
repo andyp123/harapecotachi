@@ -19,7 +19,7 @@ public class Wave : MonoBehaviour
   public Path _path; // which path to spawn monsters on
 
   // quick hack for now
-  public InstancedObjectManager _objectManager;
+  // public PrefabMap _prefabMap;
 
   private WaveState _state = WaveState.ready;
   public WaveState State
@@ -30,8 +30,8 @@ public class Wave : MonoBehaviour
 
   void Start ()
   {
-    if (_objectManager != null)
-     StartCoroutine(SpawnMonsters());
+    // if (_prefabMap != null)
+    StartCoroutine(SpawnMonsters());
   }
 
   IEnumerator SpawnMonsters ()
@@ -41,7 +41,7 @@ public class Wave : MonoBehaviour
 
     for (int i = 0; i < _spawnCount; ++i)
     {
-      GameObject monster = _objectManager.Instantiate(_monsterType, Vector3.zero, Quaternion.identity);
+      GameObject monster = GameManager.Instance.InstantiatePrefab(_monsterType, Vector3.zero, Quaternion.identity);
       if (_path != null && monster != null)
       {
         PathMover pm = monster.GetComponent<PathMover>();
