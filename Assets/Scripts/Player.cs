@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
       {
         // build tower at node
         Debug.Log("building!");
+        Transform nt = node.transform;
+        GameManager.Instance.InstantiatePrefab("TEST_TOWER_1", nt.position, nt.rotation);
         node._occupied = true;
       }
     }
