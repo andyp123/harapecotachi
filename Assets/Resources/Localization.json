@@ -1,0 +1,14 @@
+{
+  "LOC_SPAWNED": {
+    "en": "Spawned:",
+    "ja": "生成されました数：",
+  },
+  "LOC_KILLED": {
+    "en": "Killed:",
+    "ja": "倒した数：",
+  },
+  "LOC_CHANCES": {
+    "en": "Life:",
+    "ja": "ライフ：",
+  },
+}

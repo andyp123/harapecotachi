@@ -30,7 +30,6 @@ public class Wave : MonoBehaviour
 
   void Start ()
   {
-    // if (_prefabMap != null)
     StartCoroutine(SpawnMonsters());
   }
 
@@ -42,6 +41,7 @@ public class Wave : MonoBehaviour
     for (int i = 0; i < _spawnCount; ++i)
     {
       GameObject monster = GameManager.Instance.InstantiatePrefab(_monsterType, Vector3.zero, Quaternion.identity);
+      GUIManager.Instance.SetGUITextValue("VAL_SPAWNED", Time.time.ToString());
       if (_path != null && monster != null)
       {
         PathMover pm = monster.GetComponent<PathMover>();
