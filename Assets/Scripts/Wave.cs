@@ -4,6 +4,9 @@ using System.Collections;
 [System.Serializable]
 public class Wave : MonoBehaviour
 {
+  // TODO: need a proper solution for game data such as this
+  static int _spawned = 0;
+
   public enum WaveState
   {
     ready,
@@ -41,7 +44,8 @@ public class Wave : MonoBehaviour
     for (int i = 0; i < _spawnCount; ++i)
     {
       GameObject monster = GameManager.Instance.InstantiatePrefab(_monsterType, Vector3.zero, Quaternion.identity);
-      GUIManager.Instance.SetGUITextValue("VAL_SPAWNED", Time.time.ToString());
+      _spawned += 1;
+      GUIManager.Instance.SetGUITextValue("VAL_SPAWNED", _spawned.ToString());
       if (_path != null && monster != null)
       {
         PathMover pm = monster.GetComponent<PathMover>();
