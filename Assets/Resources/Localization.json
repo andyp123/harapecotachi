@@ -1,14 +1,25 @@
 {
-  "LOC_SPAWNED": {
-    "en": "Spawned:",
-    "ja": "生成されました数：",
-  },
-  "LOC_KILLED": {
-    "en": "Killed:",
-    "ja": "倒した数：",
-  },
-  "LOC_CHANCES": {
-    "en": "Life:",
-    "ja": "ライフ：",
-  },
+  "localizedStrings": [
+    {
+      "key": "LOC_SPAWNED",
+      "languages": [
+        { "languageCode": "en", "text": "Spawned:" },
+        { "languageCode": "ja", "text": "生成されました:" }
+      ]
+    },
+    {
+      "key": "LOC_KILLED",
+      "languages": [
+        { "languageCode": "en", "text": "Killed:" },
+        { "languageCode": "ja", "text": "倒した数:" }
+      ]
+    },
+    {
+      "key": "LOC_CHANCES",
+      "languages": [
+        { "languageCode": "en", "text": "Life:" },
+        { "languageCode": "ja", "text": "ライフ:" }
+      ]
+    }
+  ]
 }

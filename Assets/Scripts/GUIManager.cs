@@ -6,37 +6,49 @@ using System.Collections.Generic;
 
 public class GUIManager : Singleton<GUIManager>
 {
+  public TextAsset _localizationJSON;
 
-  // TODO: MAKE THIS WORK!
+  private Dictionary<string, Text> _localizedTextComponents;
+  private Dictionary<string, Text> _valueTextComponents;
 
-  // put GUI manager helper at root of every GUI prefab.
-  // GUI manager helper gets all text elements in UI
-  // if Text.text starts with "LOC_", it is a localization table key
-  // if Text.text starts with "VAL_", it is a value that can change (e.g. score etc.)
+  private Dictionary<string, Localization.LocalizedString> _localizationStrings = null;
+  private string _currentLanguage = "en";
 
+  private bool _initialized = false;
 
-  Dictionary<string, Text> _localizedTextComponents;
-  Dictionary<string, Text> _valueTextComponents;
-
-  Dictionary<string, string> _localizationStrings;
 
   protected GUIManager ()
   {
+    Initialize();
+  }
+
+  void Awake ()
+  {
+    Initialize();
+  }
+
+  void Initialize ()
+  {
+    if (_initialized)
+      return;
+
     _localizedTextComponents = new Dictionary<string, Text>();
     _valueTextComponents = new Dictionary<string, Text>();
 
-    LoadLocalizationStrings();
-    ApplyLanguage("en");
-  }
+    if (_localizationJSON != null)
+    {
+      _localizationStrings = Localization.LoadLanguageData(_localizationJSON.text);
 
-  public void LoadLocalizationStrings ()
-  {
-    _localizationStrings = new Dictionary<string, string>();
+      ApplyLanguage(_currentLanguage);
+    }
   }
 
   public void ApplyLanguage (string languageKey)
   {
+    if (_localizationStrings != null)
+    {
 
+    }
   }
 
   public void AddActiveTextComponents(List<Text> localizedComponents, List<Text> valueComponents)
@@ -44,12 +56,20 @@ public class GUIManager : Singleton<GUIManager>
     foreach (Text t in localizedComponents)
     {
       if (!_localizedTextComponents.ContainsKey(t.text))
+      {
         _localizedTextComponents.Add(t.text, t);
-        // TODO: load localization for this string
+        
+        if (_localizationStrings.ContainsKey(t.text))
+        {
+          Localization.LocalizedString localizedString = _localizationStrings[t.text];
+          t.text = localizedString.GetText(_currentLanguage);
+        }
+      }
       else
+      {
         Debug.LogWarning(string.Format("The string '{0}' is already in use. Skipping this object ({1}).", t.text, t.gameObject.name));
+      }
     }
-
 
     foreach (Text t in valueComponents)
     {

@@ -20,6 +20,8 @@ public class GUISync : MonoBehaviour
 
     foreach (Text t in textComponents)
     {
+      t.text.Trim();
+      
       if (t.text.StartsWith(loc))
       {
         localizedComponents.Add(t);
