@@ -1,7 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 [System.Serializable]
+public struct SerializableWave
+{
+  public string monsterType;
+  public string pathName;
+  public int groupId;
+  public int spawnCount;
+  public float startDelay;
+  public float spawnDelay;
+}
+
 public class Wave : MonoBehaviour
 {
   // TODO: need a proper solution for game data such as this
