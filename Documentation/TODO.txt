@@ -1,11 +1,11 @@
 // CURRENT PLAN
 
 Current key tasks:
-+ towers can detect enemies
-+ towers can attack enemies
-  - enemies have health and can be damaged
-+ enemies can be spawned in waves
-+ a stage can have multiple waves
++ better architecture
+  - object pooling
+  - proper prefab management (look into asset bundles)
+  - guaranteed system startup order
++ serialization of stage data
 
 
 side goals:
@@ -26,6 +26,8 @@ points to think about:
 + art direction
 + background story (simple but endearing and should motivate players)
 + gameplay ideas (more than just "it should play kinda like PixelJunk Monsters")
+  - how can players cooperate
+  - how can physics be incorporated to make attacking the monsters feel better
   - monster/tower ideas and balance
   - thoughts about menus
   - items
@@ -36,6 +38,8 @@ points to think about:
 + environment/planet types
   - desert, swamp, forest, ice, beach, rocky
 + should there be network multiplayer? (yes, but how realistic is it)
+
+
 
 // OLD PLAN BELOW!
 

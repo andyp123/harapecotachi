@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public static class Localization
 {
-  // use Application.systemLanguage instead?
   public enum LanguageCode
   {
     en, // English

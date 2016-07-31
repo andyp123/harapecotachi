@@ -1,4 +1,3 @@
-
 {
   "localizedStrings": [
     {
@@ -37,6 +36,45 @@
         {
           "languageCode": "ja",
           "text": "ライフ："
+        }
+      ]
+    },
+    {
+      "key": "LOC_RESTART",
+      "languages": [
+        {
+          "languageCode": "en",
+          "text": "Restart"
+        },
+        {
+          "languageCode": "ja",
+          "text": "やり直す"
+        }
+      ]
+    },
+    {
+      "key": "LOC_TOGGLE_LANGUAGE",
+      "languages": [
+        {
+          "languageCode": "en",
+          "text": "Toggle Language"
+        },
+        {
+          "languageCode": "ja",
+          "text": "言語切替"
+        }
+      ]
+    },
+    {
+      "key": "LOC_PAUSE",
+      "languages": [
+        {
+          "languageCode": "en",
+          "text": "Pause"
+        },
+        {
+          "languageCode": "ja",
+          "text": "ポーズ"
         }
       ]
     }
