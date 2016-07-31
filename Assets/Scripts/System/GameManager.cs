@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameManager : Singleton<GameManager>
@@ -25,5 +26,11 @@ public class GameManager : Singleton<GameManager>
   public void TogglePause ()
   {
     Time.timeScale = (Time.timeScale == 0f) ? 1f : 0f;
+  }
+
+  // TODO: totally broken. Fix
+  public void Restart ()
+  {
+    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
   }
 }
