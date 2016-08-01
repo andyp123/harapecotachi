@@ -18,6 +18,7 @@ public class GUIManager : Singleton<GUIManager>
 
   void Awake ()
   {
+    DontDestroyOnLoad(this.gameObject);
     Initialize();
   }
 

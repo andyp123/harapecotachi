@@ -13,8 +13,27 @@ public class GameManager : Singleton<GameManager>
 
   void Awake ()
   {
+    DontDestroyOnLoad(this.gameObject);
     _prefabMap = new PrefabMap();
     _prefabMap.AddPrefabs(_prefabs);
+
+    SceneManager.LoadScene(1); // load Main scene, which should be at position 1 in the build list
+  }
+
+  void Update ()
+  {
+    if (Input.GetKeyDown(KeyCode.R))
+    {
+      Restart ();
+    }
+    if (Input.GetKeyDown(KeyCode.P))
+    {
+      TogglePause ();
+    }
+    if (Input.GetKeyDown(KeyCode.L))
+    {
+      GUIManager.Instance.ToggleLanguage();
+    }
   }
 
   public GameObject InstantiatePrefab (string prefabName, Vector3 position, Quaternion rotation)
