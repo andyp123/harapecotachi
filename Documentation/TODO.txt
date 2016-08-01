@@ -4,7 +4,6 @@ Current key tasks:
 + better architecture
   - object pooling
   - proper prefab management (look into asset bundles)
-  - guaranteed system startup order
 + serialization of stage data
 
 
