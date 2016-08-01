@@ -55,7 +55,8 @@ public class GUISync : MonoBehaviour
     if (!Application.isPlaying)
       return;
 
-    GUIManager.Instance.AddActiveTextComponents(_localizedComponents, _valueComponents);
+    if (GUIManager.Instance != null)
+      GUIManager.Instance.AddActiveTextComponents(_localizedComponents, _valueComponents);
   }
 
   void OnDisable ()
