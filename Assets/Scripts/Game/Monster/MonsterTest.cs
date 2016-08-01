@@ -17,8 +17,6 @@ public class MonsterTest : Monster
   {
     if (_damage.Dead || _pathMover.AtPathEnd())
     {
-      _killed += 1;
-      GUIManager.Instance.SetGUITextValue("VAL_KILLED", _killed.ToString());
       Destroy(gameObject);
     }
   }

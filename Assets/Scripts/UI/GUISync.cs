@@ -7,6 +7,9 @@ using System.Collections.Generic;
 //   Why not set a field on the component that sets the mode. This would simplify the
 //   code as there would only need to be one table of text components.
 
+// TODO: move the localization code into awake of GUISync instead of the 
+//   GUIManager.AddActiveTextComponents function.
+
 /// <summary>
 /// The GUISync class is used to automatically link GUI text components within a hierarchy
 /// to the GUIManager when the the root node of the hierarchy (where the GUISync is attached)
@@ -55,13 +58,13 @@ public class GUISync : MonoBehaviour
     if (!Application.isPlaying)
       return;
 
-    if (GUIManager.Instance != null)
-      GUIManager.Instance.AddActiveTextComponents(_localizedComponents, _valueComponents);
+    if (Game.Instance != null)
+      Game.Instance.GUIManager.AddActiveTextComponents(_localizedComponents, _valueComponents);
   }
 
   void OnDisable ()
   {
-    if (GUIManager.Instance != null)
-      GUIManager.Instance.RemoveActiveTextComponents(_localizedComponents, _valueComponents);
+    if (Game.Instance != null)
+      Game.Instance.GUIManager.RemoveActiveTextComponents(_localizedComponents, _valueComponents);
   }
 }
