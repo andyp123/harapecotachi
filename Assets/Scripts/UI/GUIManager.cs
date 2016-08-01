@@ -30,8 +30,8 @@ public class GUIManager : Singleton<GUIManager>
     _localizedTextComponents = new Dictionary<string, Text>();
     _valueTextComponents = new Dictionary<string, Text>();
 
-    string path = "Assets/Resources/LocalizationText.json";
-    TextAsset localizationJson = (TextAsset)UnityEditor.AssetDatabase.LoadAssetAtPath(path, typeof(TextAsset));
+    //string path = "Assets/Resources/LocalizationText";
+    TextAsset localizationJson = (TextAsset)Resources.Load("LocalizationText", typeof(TextAsset));
 
     if (localizationJson != null)
       _localizationStrings = Localization.LoadLanguageData(localizationJson.text);
