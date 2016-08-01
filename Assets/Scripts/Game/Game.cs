@@ -8,7 +8,9 @@ public class Game : Singleton<Game>
 
   GameManager _gameManager;
   GUIManager _guiManager;
-  // prefabs / instance manager
+  // prefabs / instance manager / pool
+  // messaging system
+  // stagedata ... part of game manager?
 
   public GameManager GameManager
   {
@@ -25,9 +27,17 @@ public class Game : Singleton<Game>
 
     Localization.LoadLocalizationFile();
 
-    _guiManager = new GUIManager();
-    _gameManager = new GameManager();
+    GameObject go;
 
-    SceneManager.LoadScene(1); // load scene the main scene (build index 1)
+    go = new GameObject("GUIManager");
+    go.transform.parent = transform;
+    _guiManager = go.AddComponent<GUIManager>();
+
+    go = new GameObject("GameManager");
+    go.transform.parent = transform;
+    _gameManager = go.AddComponent<GameManager>();
+    // _gameManager.LoadAssets(); // or something
+
+    //SceneManager.LoadScene(1); // load scene the main scene (build index 1)
   }
 }

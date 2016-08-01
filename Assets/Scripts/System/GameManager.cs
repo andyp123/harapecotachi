@@ -12,34 +12,10 @@ public class GameManager : MonoBehaviour
   {
     DontDestroyOnLoad(this.gameObject);
     _prefabMap = new PrefabMap();
-    _prefabMap.AddPrefabs(_prefabs);
 
-    SceneManager.LoadScene(1); // load Main scene, which should be at position 1 in the build list
+    if (_prefabs != null)
+      _prefabMap.AddPrefabs(_prefabs);
   }
-
-  void Update ()
-  {
-    if (Input.GetKeyDown(KeyCode.R))
-    {
-      Restart ();
-    }
-    if (Input.GetKeyDown(KeyCode.P))
-    {
-      TogglePause ();
-    }
-    if (Input.GetKeyDown(KeyCode.L))
-    {
-      GUIManager.Instance.ToggleLanguage();
-    }
-  }
-
-  // void Update ()
-  // {
-  //   if (Input.GetKeyDown(KeyCode.R))
-  //   {
-  //     Restart();
-  //   }
-  // }
 
   // TODO: should really move to an instance manager or some such class
   public GameObject InstantiatePrefab (string prefabName, Vector3 position, Quaternion rotation)
@@ -48,6 +24,7 @@ public class GameManager : MonoBehaviour
   }
 
   // TODO: want a proper pause implementation. This is kind of weird
+  //   also, Game should probably deal with pausing, or have a PauseManager class
   public void TogglePause ()
   {
     Time.timeScale = (Time.timeScale == 0f) ? 1f : 0f;
