@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviour
 {
-  protected GameManager () {}
-
   public NamedPrefab[] _prefabs;
 
   private PrefabMap _prefabMap;
@@ -36,6 +33,15 @@ public class GameManager : Singleton<GameManager>
     }
   }
 
+  // void Update ()
+  // {
+  //   if (Input.GetKeyDown(KeyCode.R))
+  //   {
+  //     Restart();
+  //   }
+  // }
+
+  // TODO: should really move to an instance manager or some such class
   public GameObject InstantiatePrefab (string prefabName, Vector3 position, Quaternion rotation)
   {
     return _prefabMap.InstantiatePrefab(prefabName, position, rotation);
@@ -45,11 +51,5 @@ public class GameManager : Singleton<GameManager>
   public void TogglePause ()
   {
     Time.timeScale = (Time.timeScale == 0f) ? 1f : 0f;
-  }
-
-  // TODO: totally broken. Fix
-  public void Restart ()
-  {
-    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
   }
 }
