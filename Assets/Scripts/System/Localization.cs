@@ -162,6 +162,11 @@ public static class Localization
     return key;
   }
 
+  public static string GetCurrentLanguage()
+  {
+    return _currentLanguage;
+  }
+
   public static void SetCurrentLanguage(string languageCode)
   {
     if (IsSupportedLanguage(languageCode))
