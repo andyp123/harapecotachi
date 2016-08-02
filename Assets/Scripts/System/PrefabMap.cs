@@ -12,7 +12,7 @@ public struct NamedPrefab
 
 public class PrefabMap
 {
-  private Dictionary<string, GameObject> _prefabMap;
+  Dictionary<string, GameObject> _prefabMap;
 
   public PrefabMap ()
   {

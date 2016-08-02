@@ -112,6 +112,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a8d6408cb4b734cb456188fee461fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _namedPrefabs:
+  - key: TEST_MONSTER_1
+    prefab: {fileID: 195254, guid: c95448d4297acc04083a9e59faf9f46d, type: 2}
+  - key: TEST_MONSTER_2
+    prefab: {fileID: 195254, guid: 2b61c13377628124daefccf83914b9f2, type: 2}
+  - key: TEST_TOWER_1
+    prefab: {fileID: 118798, guid: b16bf59fd73c47644954d14a4f25dc49, type: 2}
 --- !u!4 &913218230
 Transform:
   m_ObjectHideFlags: 0
