@@ -27,8 +27,12 @@ public class Game : Singleton<Game>
     get { return _gameManager; }
   }
 
-
   void Awake ()
+  {
+    Initialize();
+  }
+
+  void Initialize ()
   {
     DontDestroyOnLoad(this.gameObject);
 
