@@ -32,11 +32,11 @@ public class Wave : MonoBehaviour
   {
     yield return new WaitForSeconds(_startDelay);
 
-    GameManager gameManager = Game.Instance.GameManager;
+    AssetManager assetManager = Game.Instance.AssetManager;
 
     for (int i = 0; i < _spawnCount; ++i)
     {
-      GameObject monster = gameManager.InstantiatePrefab(_monsterType, Vector3.zero, Quaternion.identity);
+      GameObject monster = assetManager.InstantiatePrefab(_monsterType, Vector3.zero, Quaternion.identity);
 
       if (_path != null && monster != null)
       {

@@ -6,20 +6,27 @@ public class Game : Singleton<Game>
 {
   protected Game () {}
 
-  GameManager _gameManager;
+  AssetManager _assetManager;
   GUIManager _guiManager;
-  // prefabs / instance manager / pool
+  GameManager _gameManager;
   // messaging system
   // stagedata ... part of game manager?
 
-  public GameManager GameManager
+  public NamedPrefab[] _namedPrefabs = null;
+
+  public AssetManager AssetManager
   {
-    get { return _gameManager; }
+    get { return _assetManager; }
   }
   public GUIManager GUIManager
   {
     get { return _guiManager; }
   }
+  public GameManager GameManager
+  {
+    get { return _gameManager; }
+  }
+
 
   void Awake ()
   {
@@ -29,6 +36,12 @@ public class Game : Singleton<Game>
 
     GameObject go;
 
+    go = new GameObject("AssetManager");
+    go.transform.parent = transform;
+    _assetManager = go.AddComponent<AssetManager>();
+    if (_namedPrefabs != null)
+      _assetManager.LoadAssets(_namedPrefabs);
+
     go = new GameObject("GUIManager");
     go.transform.parent = transform;
     _guiManager = go.AddComponent<GUIManager>();
@@ -36,8 +49,8 @@ public class Game : Singleton<Game>
     go = new GameObject("GameManager");
     go.transform.parent = transform;
     _gameManager = go.AddComponent<GameManager>();
-    // _gameManager.LoadAssets(); // or something
 
-    //SceneManager.LoadScene(1); // load scene the main scene (build index 1)
+
+    SceneManager.LoadScene(1); // load the main scene (build index 1)
   }
 }
