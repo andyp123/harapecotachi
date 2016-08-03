@@ -54,7 +54,7 @@ public class Game : Singleton<Game>
     go.transform.parent = transform;
     _gameManager = go.AddComponent<GameManager>();
 
-
-    SceneManager.LoadScene(1); // load the main scene (build index 1)
+    if (SceneManager.GetActiveScene().buildIndex == 0)
+      SceneManager.LoadScene(1); // load the main scene (build index 1)
   }
 }
