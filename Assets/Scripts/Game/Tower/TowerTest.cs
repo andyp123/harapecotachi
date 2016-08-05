@@ -36,7 +36,8 @@ public class TowerTest : Tower
       Damage damage = _target.GetComponent<Damage>();
       if (damage != null)
       {
-        damage.ApplyDamage(_shotDamage);
+        Vector3 dir = (_target.transform.position - transform.position).normalized;
+        damage.ApplyDamage(_shotDamage, dir);
         _nextAttackEnableTime = Time.time + _shotDelay;
       }
     }

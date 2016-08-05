@@ -2,8 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 
+// TODO: convert everything to use the actual language codes
+
+/// <summary>
+/// Static class that handles storage and interaction with localization data.
+/// </summary>
 public static class Localization
 {
+  /// <summary>
+  /// Enum that contains ISO 639-1 language codes instead of using Unity's built in enum.
+  /// </summary>
   public enum LanguageCode
   {
     en, // English
@@ -38,8 +46,9 @@ public static class Localization
     public SerializableLocalizedString[] localizedStrings;
   }
 
-
-  // used for actual storage of data in memory
+  /// <Summary>
+  /// Used to store localization keys and the appropriate strings for each supported translation.
+  /// </summary>
   public class LocalizedString
   {
     public string key;
@@ -74,7 +83,25 @@ public static class Localization
   }
 
 
-  public static Dictionary<string, LocalizedString> LoadLanguageData (string json)
+  // store localization data here
+  static Dictionary<string, LocalizedString> _languageData = null;
+  static string _currentLanguage = "en";
+
+  public static void LoadLocalizationFile (TextAsset localizationFile = null)
+  {
+    if (localizationFile == null)
+    {
+      string defaultPath = "Assets/Resources/LocalizationText.json";
+      localizationFile = (TextAsset)UnityEditor.AssetDatabase.LoadAssetAtPath(defaultPath, typeof(TextAsset));
+    }
+
+    if (localizationFile != null)
+      DeserializeLanguageFile(localizationFile.text);
+    else
+      Debug.Log("Localization file not found");
+  }
+
+  static void DeserializeLanguageFile (string json)
   {
     SerializableLocalizedStrings sLocalizedStrings = JsonUtility.FromJson<SerializableLocalizedStrings>(json);
 
@@ -99,7 +126,7 @@ public static class Localization
           }
           else
           {
-            Debug.LogWarning(string.Format("The language code '{0}' does not match a supported language.", languageCode));
+            Debug.LogWarning(string.Format("[Localization] The language code '{0}' does not match a supported language.", languageCode));
           }
         }
 
@@ -107,7 +134,45 @@ public static class Localization
       }
     }
 
-    return languageData;
+    _languageData = languageData;
+  }
+
+  /// <summary>
+  /// Gets the text for the passed in localization key in the currently set language or an
+  /// optionally specified one.
+  /// </summary>
+  public static string GetLocalizedText(string key, string languageCode = null)
+  {
+    if (_languageData == null)
+    {
+      Debug.LogWarning("[Localization] No localization data has been loaded, returning input.");
+      return key;
+    }
+
+    LocalizedString localizedString = null;
+    if (_languageData.TryGetValue(key, out localizedString))
+    {
+      if (string.IsNullOrEmpty(languageCode))
+        return localizedString.GetText(_currentLanguage);
+      else
+        return localizedString.GetText(languageCode);
+    }
+
+    Debug.LogWarning(string.Format("[Localization] No data for key {0} exists in the localization data.", key));
+    return key;
+  }
+
+  public static string GetCurrentLanguage()
+  {
+    return _currentLanguage;
+  }
+
+  public static void SetCurrentLanguage(string languageCode)
+  {
+    if (IsSupportedLanguage(languageCode))
+      _currentLanguage = languageCode;
+    else
+      Debug.LogWarning(string.Format("[Localization] The language code '{0}' does not match a supported language.", languageCode));
   }
 
   public static bool IsSupportedLanguage(string languageCode)

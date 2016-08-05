@@ -6,7 +6,7 @@ public class PathMover : MonoBehaviour
   public Path _path;
   public float _speed = 5f;
 
-  private float _distance = 0f;
+  protected float _distance = 0f;
 
   void Start ()
   {
@@ -47,7 +47,7 @@ public class PathMover : MonoBehaviour
     return Vector3.zero;
   }
 
-  public bool AtPathEnd ()
+  public virtual bool AtPathEnd ()
   {
     if (_path != null)
       return (_distance >= _path.Length);

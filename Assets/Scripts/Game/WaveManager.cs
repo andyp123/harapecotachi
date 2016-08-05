@@ -5,8 +5,18 @@ using System.Collections.Generic;
 public class WaveGroup
 {
   public int _groupID = 1;
-
   public List<Wave> _waves;
+
+  bool _startedSpawning = false;
+  public bool StartedSpawning
+  {
+    get { return _startedSpawning; }
+  }
+  public bool FinishedSpawning
+  {
+    get { return HasFinishedSpawning(); }
+  }
+
 
   public WaveGroup ()
   {
@@ -18,6 +28,28 @@ public class WaveGroup
     if (wave._groupID == _groupID)
       _waves.Add(wave);
   }
+
+  public void StartSpawning ()
+  {
+    if (!_startedSpawning)
+    {
+      foreach (Wave w in _waves)
+      {
+        w.enabled = true;
+      }
+      _startedSpawning = true;
+    }
+  }
+
+  bool HasFinishedSpawning ()
+  {
+    foreach (Wave w in _waves)
+    {
+      if (!w.FinishedSpawning)
+        return false;
+    }
+    return true;
+  }
 }
 
 public class WaveManager : MonoBehaviour
@@ -25,9 +57,10 @@ public class WaveManager : MonoBehaviour
   public float _waveTriggerDelay = 15f;
   public bool _waitForPreviousWave = false;
 
-  public List<WaveGroup> _waveGroups;
-  private int _currentGroupIndex = 0;
-  private float _lastWaveStartTime = -10000f;
+  List<WaveGroup> _waveGroups;
+
+  int _currentGroupIndex = 0;
+  float _nextWaveStartTime = 0f;
 
   void Awake ()
   {
@@ -49,15 +82,17 @@ public class WaveManager : MonoBehaviour
     if (_currentGroupIndex >= _waveGroups.Count)
       return;
 
-    if (Time.time >= _lastWaveStartTime + _waveTriggerDelay)
+    WaveGroup currentGroup = _waveGroups[_currentGroupIndex];
+
+    if (!currentGroup.StartedSpawning && Time.time >= _nextWaveStartTime)
     {
-      WaveGroup wg = _waveGroups[_currentGroupIndex];
-      foreach (Wave w in wg._waves)
-      {
-        w.enabled = true;
-      }
+      currentGroup.StartSpawning();
+    }
+
+    if (currentGroup.FinishedSpawning)
+    {
       _currentGroupIndex++;
-      _lastWaveStartTime = Time.time;
+      _nextWaveStartTime = Time.time + _waveTriggerDelay;
     }
   }
 
