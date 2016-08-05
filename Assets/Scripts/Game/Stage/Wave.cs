@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
+// for file serialization
 [System.Serializable]
 public struct SerializableWave
 {
@@ -21,6 +21,12 @@ public class Wave : MonoBehaviour
   public float _startDelay = 0f; // delay before first monster is spawned
   public float _spawnDelay = 1f; // spawn next monster after this many seconds
   public Path _path; // which path to spawn monsters on
+
+  bool _finishedSpawning = false;
+  public bool FinishedSpawning 
+  {
+    get { return _finishedSpawning; }
+  }
 
 
   void Start ()
@@ -46,5 +52,7 @@ public class Wave : MonoBehaviour
       }
       yield return new WaitForSeconds(_spawnDelay);
     }
+
+    _finishedSpawning = true;
   }
 }
