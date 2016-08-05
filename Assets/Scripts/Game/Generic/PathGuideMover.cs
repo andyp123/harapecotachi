@@ -3,18 +3,19 @@ using System.Collections;
 
 public class PathGuideMover : PathMover
 {
-  public float _separationDistance = 1f;
+  public float _separationDistanceMax = 1f;
+  public float _separationDistanceMin = 0.5f;
   public bool _waitOnSeparated = true;
 
   Vector3 _guidePosition = Vector3.zero;
 
   void Start ()
   {
-    _distance = _separationDistance;
+    _distance = _separationDistanceMax;
     if (_path != null)
     {
       transform.position = _path.GetPositionAtDistance(0f);
-      _guidePosition = _path.GetPositionAtDistance(_separationDistance);
+      _guidePosition = _path.GetPositionAtDistance(_separationDistanceMax);
     }
   }
 
@@ -22,10 +23,16 @@ public class PathGuideMover : PathMover
   {
     if (_path != null)
     {
+      float sqrMinSeparation = _separationDistanceMin * _separationDistanceMin;
+      float sqrMaxSeparation = _separationDistanceMax * _separationDistanceMax;
+      float sqrSeparation = (transform.position - _guidePosition).sqrMagnitude;
+
       // update guide if within range
-      if (_waitOnSeparated && (transform.position - _guidePosition).sqrMagnitude < _separationDistance * _separationDistance)
+      if (_waitOnSeparated && sqrSeparation < sqrMaxSeparation)
       {
-        _distance = Mathf.Clamp(_distance + _speed * Time.deltaTime, 0f, _path.Length);
+        // speedScalar tries to prevent the object catching up and overtaking the guide if hit by a sudden impulse
+        float speedScalar = (sqrSeparation < sqrMinSeparation) ? 1f + (sqrMinSeparation - sqrSeparation) / sqrMinSeparation * 5f : 1f;
+        _distance = Mathf.Clamp(_distance + _speed * speedScalar * Time.deltaTime, 0f, _path.Length);
         _guidePosition = _path.GetPositionAtDistance(_distance);
       }
 
