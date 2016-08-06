@@ -36,6 +36,8 @@ public class TowerTest : Tower
       Damage damage = _target.GetComponent<Damage>();
       if (damage != null)
       {
+        Debug.DrawLine(_target.transform.position, transform.position + Vector3.up * 2f, Color.yellow, 0.2f);
+
         Vector3 dir = (_target.transform.position - transform.position).normalized;
         damage.ApplyDamage(_shotDamage, dir);
         _nextAttackEnableTime = Time.time + _shotDelay;
@@ -47,7 +49,8 @@ public class TowerTest : Tower
   {
     if (_target == null)
     {
-      _target = _sensor.GetNearestTarget();
+      TargetInfo targetInfo = _sensor.GetNearestTarget();
+      _target = (targetInfo != null) ? targetInfo.target : null;
     }
     else
     {

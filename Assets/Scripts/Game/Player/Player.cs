@@ -33,7 +33,8 @@ public class Player : MonoBehaviour
 
   void TryBuild()
   {
-    GameObject nearest = _objectPlacementSensor.GetNearestTarget();
+    TargetInfo targetInfo = _objectPlacementSensor.GetNearestTarget();
+    GameObject nearest = (targetInfo != null) ? targetInfo.target : null;
     if (nearest != null)
     {
       ObjectPlacementNode node = nearest.GetComponent<ObjectPlacementNode>();
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour
       {
         // build tower at node
         Transform nt = node.transform;
-        Game.Instance.AssetManager.InstantiatePrefab("TEST_TOWER_1", nt.position, nt.rotation);
+        Game.Instance.AssetManager.InstantiatePrefab("BOMB_TOWER", nt.position, nt.rotation);
         node._occupied = true;
       }
       else
