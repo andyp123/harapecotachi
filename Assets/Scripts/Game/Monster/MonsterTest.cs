@@ -20,4 +20,9 @@ public class MonsterTest : Monster
       Destroy(gameObject);
     }
   }
+
+  public override Vector3 GetPositionAfterTime (float time)
+  {
+    return _pathMover.GetPositionAfterTime (time);
+  }
 }

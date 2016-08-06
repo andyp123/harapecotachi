@@ -9,6 +9,8 @@ public class TowerBomb : Tower
 
   public float _shotDamage = 1f;
   public float _shotDelay = 1f; // delay between shots
+  public float _shotTimeToTarget = 1f; // how long a shot takes to reach its target
+  public float _shotInaccuracy = 0f;
   private float _nextAttackEnableTime = 0f;
 
   private Sensor _sensor = null;
@@ -34,8 +36,24 @@ public class TowerBomb : Tower
   {
     if (_target != null && Time.time >= _nextAttackEnableTime)
     {
-      Vector3 attackPosition = _target.transform.position + new Vector3(Random.value, 0f, Random.value);
-      GameObject.Instantiate(_bombPrefab, attackPosition, Quaternion.identity);
+      Vector3 shotStartPosition = transform.position + Vector3.up * 2f;
+      Vector3 attackPosition = _target.GetComponent<Monster>().GetPositionAfterTime(_shotTimeToTarget);
+      attackPosition += new Vector3(Random.value, 0, Random.value) * _shotInaccuracy;
+
+      GameObject bomb = GameObject.Instantiate(_bombPrefab, shotStartPosition, Quaternion.identity) as GameObject;
+      BallisticPhysics physics = bomb.gameObject.GetComponent<BallisticPhysics>();
+      if (physics != null)
+      {
+        float maxHeight = shotStartPosition.y * 1.5f;
+        Vector3 fireVelocity;
+        float gravity;
+        if (Utility.SolveBallisticArc (shotStartPosition, attackPosition, _shotTimeToTarget, maxHeight, out fireVelocity, out gravity))
+        {
+          physics._gravity = gravity;
+          physics.AddForce(fireVelocity);
+        }
+      }
+
       _nextAttackEnableTime = Time.time + _shotDelay;
     }
   }

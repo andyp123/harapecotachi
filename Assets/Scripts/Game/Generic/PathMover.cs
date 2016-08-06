@@ -36,7 +36,7 @@ public class PathMover : MonoBehaviour
   }
 
   // for predicting where a monster will be so towers can shoot them accurately
-  public Vector3 GetPositionAfterTime (float time)
+  public virtual Vector3 GetPositionAfterTime (float time)
   {
     if (_path != null)
     {

@@ -14,8 +14,8 @@ public class Explosion : MonoBehaviour
   void Awake ()
   {
     _sensor = gameObject.GetComponent<Sensor>();
-    Collider collider = gameObject.GetComponent<Collider>();
-    _radius = collider.bounds.extents.magnitude; // TODO: this is approximate unless the collider is a sphere
+    SphereCollider collider = gameObject.GetComponent<SphereCollider>();
+    _radius = collider.radius; // TODO: will I need other types of collider?
 
     StartCoroutine(Explode());
   }
@@ -46,6 +46,6 @@ public class Explosion : MonoBehaviour
   void OnDrawGizmos ()
   {
     Gizmos.color = Color.yellow;
-    Gizmos.DrawWireSphere(transform.position, 5f);
+    Gizmos.DrawWireSphere(transform.position, _radius);
   }
 }

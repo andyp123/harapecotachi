@@ -3,19 +3,21 @@ using System.Collections;
 
 public class PathGuideMover : PathMover
 {
-  public float _separationDistanceMax = 1f;
-  public float _separationDistanceMin = 0.5f;
+  public float _maxSeparationDistance = 1f;
+  public float _minSeparationDistance = 0.5f;
   public bool _waitOnSeparated = true;
 
+  // the moving object follows a guide object instead of snapping to the path
+  // note that _distance now applies to the guide object's distance, not the follower
   Vector3 _guidePosition = Vector3.zero;
 
   void Start ()
   {
-    _distance = _separationDistanceMax;
+    _distance = _maxSeparationDistance;
     if (_path != null)
     {
       transform.position = _path.GetPositionAtDistance(0f);
-      _guidePosition = _path.GetPositionAtDistance(_separationDistanceMax);
+      _guidePosition = _path.GetPositionAtDistance(_maxSeparationDistance);
     }
   }
 
@@ -23,8 +25,8 @@ public class PathGuideMover : PathMover
   {
     if (_path != null)
     {
-      float sqrMinSeparation = _separationDistanceMin * _separationDistanceMin;
-      float sqrMaxSeparation = _separationDistanceMax * _separationDistanceMax;
+      float sqrMinSeparation = _minSeparationDistance * _minSeparationDistance;
+      float sqrMaxSeparation = _maxSeparationDistance * _maxSeparationDistance;
       float sqrSeparation = (transform.position - _guidePosition).sqrMagnitude;
 
       // update guide if within range
@@ -41,6 +43,28 @@ public class PathGuideMover : PathMover
       transform.position += dir * _speed * Time.deltaTime;
       transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
     }
+  }
+
+  // this is approximate, as the object following the guide is not following the curve exactly, so this will not be accurate if:
+  // the separation distance is large (looser curve following means larger corners can be cut)
+  // the object position changed drastically due to another event
+  public override Vector3 GetPositionAfterTime (float time)
+  {
+    Vector3 diff = _guidePosition - transform.position;
+    float separation = diff.magnitude;
+    float distanceAfterTime = _speed * time;
+
+    // TODO: check this is ok, then merge first two cases
+    if (separation < _maxSeparationDistance) // moving along path behind guide (probably!)
+    {
+      return _path.GetPositionAtDistance(_distance + distanceAfterTime - separation);
+    }
+    if (separation < distanceAfterTime) // separated, but will be back on path after time
+    {
+      return _path.GetPositionAtDistance(_distance + distanceAfterTime - separation);
+    }
+    // separated and will not reach path before time, so assume linear toward guide
+    return transform.position + diff.normalized * distanceAfterTime;
   }
   
   public override bool AtPathEnd ()

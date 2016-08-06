@@ -254,8 +254,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerTop: {fileID: 159462}
-  _bombPrefab: {fileID: 1000010136758468, guid: bf7f2f22103109f4692420ae223cec54,
+  _bombPrefab: {fileID: 1000010857804868, guid: 4b23266027b26bc48991389b33621790,
     type: 2}
   _rotationSpeed: 60
   _shotDamage: 5
-  _shotDelay: 3
+  _shotDelay: 1
+  _shotTimeToTarget: 1
+  _shotInaccuracy: 0.1
