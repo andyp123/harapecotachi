@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _path: {fileID: 0}
-  _speed: 3
+  _speed: 2
   _separationDistanceMax: 1
   _separationDistanceMin: 0.5
   _waitOnSeparated: 1
