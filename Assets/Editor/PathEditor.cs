@@ -36,9 +36,9 @@ public class PathEditor : Editor
   {
     _path = target as Path;
 
-    Handles.color = Color.white;
 
     //draw lines
+    Handles.color = Color.gray;
     if (_path.NumPoints > 1)
     {
       Vector3 a = _path.GetPoint(0);
