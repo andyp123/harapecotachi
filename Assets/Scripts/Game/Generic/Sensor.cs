@@ -2,76 +2,127 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
+public class TargetInfo
+{
+  public GameObject target;
+  public float sqrDistance;
+
+  public TargetInfo ()
+  {
+    target = null;
+    sqrDistance = -1f;
+  }
+
+  public TargetInfo (GameObject target, float sqrDistance)
+  {
+    this.target = target;
+    this.sqrDistance = sqrDistance;
+  }
+}
+
+
 [RequireComponent(typeof(Collider))]
 public class Sensor : MonoBehaviour
 {
-  private Dictionary<int, GameObject> _targets;
+  protected List<TargetInfo> _targets;
 
-
-  protected virtual void SetColliderSize () {} // only used by CapsuleSensor
+  protected virtual void SetColliderSize () {}
 
   void Awake ()
   {
-    _targets = new Dictionary<int, GameObject>();
     SetColliderSize();
+    _targets = new List<TargetInfo>(10);
   }
 
   void Update ()
   {
-    CleanInvalidTargets();
+    // remove invalid targets (destroyed etc.) and update distance on valid ones
+    for (int i = 0; i < _targets.Count; ++i)
+    {
+      TargetInfo t = _targets[i];
+      if (t.target == null)
+      {
+        _targets.RemoveAt(i);
+        --i;
+      }
+      else
+        t.sqrDistance = (t.target.transform.position - transform.position).sqrMagnitude;
+    }
+
+    // sort the list of targets by distance from the sensor center
+    _targets.Sort( (a, b) => {
+      return a.sqrDistance.CompareTo(b.sqrDistance);
+      });
   }
 
   void OnTriggerEnter (Collider other)
   {
     GameObject go = other.gameObject.FindRoot();
-    int uid = go.GetInstanceID();
-    _targets.Add(uid, go);
+    if (!IsTracked(go))
+    {
+      float sqrDistance = (go.transform.position - transform.position).sqrMagnitude;
+      int index = 0;
+      foreach (TargetInfo t in _targets)
+      {
+        if (t.sqrDistance > sqrDistance)
+          break;
+        index++;
+      }
+
+      _targets.Insert(index, new TargetInfo(go, sqrDistance));
+    }
   }
 
   void OnTriggerExit (Collider other)
   {
     GameObject go = other.gameObject.FindRoot();
-    int uid = go.GetInstanceID();
-    _targets.Remove(uid);
+    int index = GetIndex(go);
+    if (index >= 0)
+      _targets.RemoveAt(index);
   }
 
-  // required because gameobjects that are destroyed will not cause OnTriggerExit to fire
-  void CleanInvalidTargets ()
+  int GetIndex (GameObject go)
   {
-    List<int> keysToRemove = new List<int>();
+    int instanceID = go.GetInstanceID();
 
-    foreach (var key in _targets.Keys)
+    for (int i = 0; i < _targets.Count; ++i)
     {
-      GameObject target = _targets[key];
-      if (target == null)
-        keysToRemove.Add(key);
+      if (_targets[i].target.GetInstanceID() == instanceID)
+        return i;
     }
-    foreach (int key in keysToRemove)
-      _targets.Remove(key);
+
+    return -1;
   }
 
-  public GameObject GetNearestTarget ()
+  public TargetInfo GetNearestTarget ()
   {
-    GameObject nearestTarget = null;
-    float nearestDistanceSqr = 9999999f;
+    return (_targets.Count > 0) ? _targets[0] : null;
+  }
 
-    foreach (var key in _targets.Keys)
+  public TargetInfo[] GetNearestTargets (int maxTargets = -1)
+  {
+    int arrayLength = (maxTargets != -1 && maxTargets < _targets.Count) ? maxTargets : _targets.Count;
+    TargetInfo[] targets = new TargetInfo[arrayLength];
+
+    for (int i = 0; i < arrayLength; ++i)
     {
-      GameObject target = _targets[key];
-      if (target == null) continue; // annoying, but it's possible the object could have been destroyed
-      float distanceSqr = (target.transform.position - transform.position).sqrMagnitude;
-      if (distanceSqr < nearestDistanceSqr)
-      {
-        nearestDistanceSqr = distanceSqr;
-        nearestTarget = target;
-      }
+      targets[i] = _targets[i];
     }
 
-    return nearestTarget;
+    return targets;
   }
 
   public bool IsTracked (GameObject go)
   {
-    return _targets.ContainsKey(go.GetInstanceID());
+    int instanceID = go.GetInstanceID();
+
+    foreach (TargetInfo t in _targets)
+    {
+      if (t.target.GetInstanceID() == instanceID)
+        return true;
+    }
+
+    return false;
   }
 }
