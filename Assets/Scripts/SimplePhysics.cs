@@ -12,7 +12,7 @@ public class SimplePhysics : MonoBehaviour
   void Update ()
   {
     _velocity -= _velocity * _friction * Time.deltaTime;
-    transform.position += new Vector3(_velocity.x * _axisMask.x, _velocity.y * _axisMask.y, _velocity.z * _axisMask.z) * Time.deltaTime;
+    transform.position += Vector3.Scale(_velocity, _axisMask) * Time.deltaTime;
   }
 
   public void AddForce (Vector3 force)
