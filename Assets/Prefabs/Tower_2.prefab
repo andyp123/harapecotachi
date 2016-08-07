@@ -256,7 +256,7 @@ MonoBehaviour:
   _towerTop: {fileID: 159462}
   _bombPrefab: {fileID: 1000010857804868, guid: 4b23266027b26bc48991389b33621790,
     type: 2}
-  _rotationSpeed: 60
+  _rotationSpeed: 240
   _shotDamage: 5
   _shotDelay: 2
   _shotTimeToTarget: 1

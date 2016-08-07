@@ -1,15 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum DamageType
+{
+  Ballistic,
+  Fire,
+  Ice,
+  Electrical
+}
+
 public class DamageInfo
 {
   // originator (e.g player, or some tower)
-  // hittype flags (e.g. can hit ground, air, mix)
   // type of damage (ballistic, fire, freeze, electrical, etc.)
-  // damage location or direction
+  // knock back direction
   // knock back force
   // shield break
   // damage amount
+  float baseDamage;
+  float knockbackForce;
+  Vector3 knockbackDir;
+  DamageType damageType;
+  GameObject originator;
 }
 
 public class Damage : MonoBehaviour

@@ -716,7 +716,7 @@ MonoBehaviour:
   - {x: 0.19619364, y: 0, z: -2.5121527}
   - {x: -2.5476587, y: 0, z: -0.40517914}
   - {x: -0.05776307, y: 0, z: 2.489933}
-  _tension: 0
+  _tension: -0.56
 --- !u!4 &583979737
 Transform:
   m_ObjectHideFlags: 2
