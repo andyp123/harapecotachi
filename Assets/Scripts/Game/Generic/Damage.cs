@@ -1,6 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public class DamageInfo
+{
+  // originator (e.g player, or some tower)
+  // hittype flags (e.g. can hit ground, air, mix)
+  // type of damage (ballistic, fire, freeze, electrical, etc.)
+  // damage location or direction
+  // knock back force
+  // shield break
+  // damage amount
+}
+
 public class Damage : MonoBehaviour
 {
   public float _health;
