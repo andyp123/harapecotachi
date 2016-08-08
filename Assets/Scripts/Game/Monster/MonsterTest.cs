@@ -15,7 +15,11 @@ public class MonsterTest : Monster
 
   void Update()
   {
-    if (_damage.Dead || _pathMover.AtPathEnd())
+    if (_damage.Dead)
+    {
+      Die();
+    }
+    if (_pathMover.AtPathEnd())
     {
       Destroy(gameObject);
     }
