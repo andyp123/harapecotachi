@@ -35,9 +35,9 @@ public class Game : Singleton<Game>
     DontDestroyOnLoad(this.gameObject);
 
     GameData.Initialize();
-    GameData.AddIntValue("VAL_SPAWNED", 0);
-    GameData.AddIntValue("VAL_KILLED", 0);
-    GameData.AddIntValue("VAL_CHANCES", 10);
+    GameData.AddIntData("VAL_SPAWNED", 0, 0);
+    GameData.AddIntData("VAL_KILLED", 0, 0);
+    GameData.AddIntData("VAL_CHANCES", 10, 10);
 
     Localization.LoadLocalizationFile();
 

@@ -3,14 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 
 
+// GameData.Data<int>
+// GameData.Data<string>
+
 public static class GameData
 {
-  public class IntValue
+  public class Data<T>
   {
-    public delegate void OnChange(int v);
+    public delegate void OnChange(T v);
 
-    int _val = 0;
-    public int Value
+    T _val;
+
+    OnChange _onChange = null;
+
+    public T Value
     {
       get { return _val; }
       set
@@ -20,9 +26,13 @@ public static class GameData
           _onChange.Invoke(_val);
       }
     }
+    public T Default { get; set; }
 
-    OnChange _onChange = null; // be aware that these can be misused to create memory leaks!
-  
+    public void Reset ()
+    {
+      Value = Default;
+    }
+
     public void RegisterOnChange (OnChange onChange)
     {
       _onChange = onChange;
@@ -39,32 +49,61 @@ public static class GameData
     }
   }
 
-  static Dictionary<string, IntValue> _intValues;
+
+  static Dictionary<string, Data<int>> _intData;
+  static Dictionary<string, Data<float>> _floatData;
 
   public static void Initialize ()
   {
-    _intValues = new Dictionary<string, IntValue>();
+    _intData = new Dictionary<string, Data<int>>();
+    _floatData = new Dictionary<string, Data<float>>();
   }
 
-  public static void AddIntValue (string key, int initialValue)
+  // INT VALUES
+  public static void AddIntData (string key, int initialValue, int defaultValue = 0)
   {
-    if (!_intValues.ContainsKey(key))
+    if (!_intData.ContainsKey(key))
     {
-      IntValue intValue = new IntValue();
-      intValue.Value = initialValue;
-      _intValues.Add(key, intValue);
+      Data<int> data = new Data<int>();
+      data.Value = initialValue;
+      data.Default = defaultValue;
+      _intData.Add(key, data);
     }
     else
-      Debug.LogError(string.Format("[GameData] IntValue '{0}' is already registered.", key));
+      Debug.LogError(string.Format("[GameData] Int data '{0}' is already registered.", key));
   }
 
-  public static IntValue GetIntValue (string key)
+  public static Data<int> GetIntData (string key)
   {
-    IntValue intValue;
-    if (_intValues.TryGetValue(key, out intValue))
-      return intValue;
+    Data<int> data;
+    if (_intData.TryGetValue(key, out data))
+      return data;
 
-    Debug.LogError(string.Format("[GameData] IntValue '{0}' is not registered.", key));
+    Debug.LogError(string.Format("[GameData] Int data '{0}' is not registered.", key));
+    return null;
+  }
+
+  // FLOAT VALUES
+  public static void AddFloatData (string key, float initialValue, float defaultValue = 0f)
+  {
+    if (!_floatData.ContainsKey(key))
+    {
+      Data<float> data = new Data<float>();
+      data.Value = initialValue;
+      data.Default = defaultValue;
+      _floatData.Add(key, data);
+    }
+    else
+      Debug.LogError(string.Format("[GameData] Float data '{0}' is already registered.", key));
+  }
+
+  public static Data<float> GetFloatData (string key)
+  {
+    Data<float> data;
+    if (_floatData.TryGetValue(key, out data))
+      return data;
+
+    Debug.LogError(string.Format("[GameData] Float data '{0}' is not registered.", key));
     return null;
   }
 }

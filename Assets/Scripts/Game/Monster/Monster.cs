@@ -8,9 +8,9 @@ public abstract class Monster : MonoBehaviour
 
   protected virtual void Die ()
   {
-    GameData.IntValue intValue = GameData.GetIntValue ("VAL_KILLED");
-    if (intValue != null)
-      intValue.Value += 1;
+    GameData.Data<int> intData = GameData.GetIntData("VAL_KILLED");
+    if (intData != null)
+      intData.Value += 1;
     Destroy (gameObject);
   }
 }

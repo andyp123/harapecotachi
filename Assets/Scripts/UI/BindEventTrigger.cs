@@ -53,13 +53,9 @@ public static class DelegateFunctions
   public static void RestartCurrentScene (BaseEventData data)
   {
     // TODO:  should have a ResetValue function and store more data about each value (e.g. current, default, min, max)
-    GameData.IntValue iv;
-    iv = GameData.GetIntValue("VAL_KILLED");
-    iv.Value = 0;
-    iv = GameData.GetIntValue("VAL_SPAWNED");
-    iv.Value = 0;
-    iv = GameData.GetIntValue("VAL_CHANCES");
-    iv.Value = 10;
+    GameData.GetIntData("VAL_KILLED").Reset();
+    GameData.GetIntData("VAL_SPAWNED").Reset();
+    GameData.GetIntData("VAL_CHANCES").Reset();
 
     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
   }

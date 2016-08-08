@@ -41,11 +41,11 @@ public class GUIManager : MonoBehaviour
       if (!_valueTextComponents.ContainsKey(key))
       {
         _valueTextComponents.Add(key, t);
-        GameData.IntValue intValue = GameData.GetIntValue(key);
-        if (intValue != null)
+        GameData.Data<int> intData = GameData.GetIntData(key);
+        if (intData != null)
         {
-          t.text = intValue.ToString();
-          intValue.RegisterOnChange( (v) => {
+          t.text = intData.ToString();
+          intData.RegisterOnChange( (v) => {
             t.text = v.ToString();
             });
         }
@@ -73,9 +73,9 @@ public class GUIManager : MonoBehaviour
       if (_valueTextComponents.ContainsKey(key))
       {
         _valueTextComponents.Remove(key);
-        GameData.IntValue intValue = GameData.GetIntValue(key);
-        if (intValue != null)
-          intValue.DeregisterOnChange();
+        GameData.Data<int> intData = GameData.GetIntData(key);
+        if (intData != null)
+          intData.DeregisterOnChange();
       }
     }
   }

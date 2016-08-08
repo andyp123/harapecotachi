@@ -43,9 +43,9 @@ public class Wave : MonoBehaviour
     for (int i = 0; i < _spawnCount; ++i)
     {
       GameObject monster = assetManager.InstantiatePrefab(_monsterType, Vector3.zero, Quaternion.identity);
-      GameData.IntValue intValue = GameData.GetIntValue("VAL_SPAWNED");
-      if (intValue != null)
-        intValue.Value += 1;
+      GameData.Data<int> intData = GameData.GetIntData("VAL_SPAWNED");
+      if (intData != null)
+        intData.Value += 1;
 
       if (_path != null && monster != null)
       {
