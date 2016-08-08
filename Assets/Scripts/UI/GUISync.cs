@@ -8,14 +8,14 @@ using System.Collections.Generic;
 //   code as there would only need to be one table of text components.
 
 // TODO: move the localization code into awake of GUISync instead of the 
-//   GUIManager.AddActiveTextComponents function.
+//   GUIManager.AddActiveTextComponents function to avoid setting on enable/disable
 
 /// <summary>
 /// The GUISync class is used to automatically link GUI text components within a hierarchy
 /// to the GUIManager when the the root node of the hierarchy (where the GUISync is attached)
 /// gets enabled or disabled. This allows for effortless localization of static UI text.
 /// GUISync also links text elements that are supposed to contain value strings to the
-/// GUIManager so that they can be easily updated as long as the called knows the name.
+/// GUIManager so that they can be easily updated as long as the caller knows the name.
 /// </sumary>
 public class GUISync : MonoBehaviour
 {

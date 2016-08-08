@@ -98,7 +98,7 @@ public static class Localization
     if (localizationFile != null)
       DeserializeLanguageFile(localizationFile.text);
     else
-      Debug.Log("Localization file not found");
+      Debug.LogError("Localization file not found");
   }
 
   static void DeserializeLanguageFile (string json)
