@@ -39,7 +39,17 @@ public class GUIManager : MonoBehaviour
       Text t = entry.Value;
 
       if (!_valueTextComponents.ContainsKey(key))
+      {
         _valueTextComponents.Add(key, t);
+        GameData.IntValue intValue = GameData.GetIntValue(key);
+        if (intValue != null)
+        {
+          t.text = intValue.ToString();
+          intValue.RegisterOnChange( (v) => {
+            t.text = v.ToString();
+            });
+        }
+      }
       else
         Debug.LogWarning(string.Format("The string '{0}' is already in use. Skipping this object ({1}).", key, t.gameObject.name));
     }
@@ -63,6 +73,9 @@ public class GUIManager : MonoBehaviour
       if (_valueTextComponents.ContainsKey(key))
       {
         _valueTextComponents.Remove(key);
+        GameData.IntValue intValue = GameData.GetIntValue(key);
+        if (intValue != null)
+          intValue.DeregisterOnChange();
       }
     }
   }

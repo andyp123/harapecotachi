@@ -9,8 +9,6 @@ public class Game : Singleton<Game>
   AssetManager _assetManager;
   GUIManager _guiManager;
   GameManager _gameManager;
-  // messaging system
-  // stagedata ... part of game manager?
 
   public NamedPrefab[] _namedPrefabs = null;
 
@@ -35,6 +33,11 @@ public class Game : Singleton<Game>
   void Initialize ()
   {
     DontDestroyOnLoad(this.gameObject);
+
+    GameData.Initialize();
+    GameData.AddIntValue("VAL_SPAWNED", 0);
+    GameData.AddIntValue("VAL_KILLED", 0);
+    GameData.AddIntValue("VAL_CHANCES", 10);
 
     Localization.LoadLocalizationFile();
 
