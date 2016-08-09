@@ -20,7 +20,14 @@ public class GameManager : MonoBehaviour
 
   public void SetGameOver ()
   {
+    // TODO: this is shit, so change it once a better solution is ready
+    GameObject ui = GameObject.Find("UI");
+    GameObject gameUI = ui.transform.Find("GameUI").gameObject;
+    GameObject gameOverUI = ui.transform.Find("GameOverUI").gameObject;
+
+    gameUI.SetActive(false);
+    gameOverUI.SetActive(true);
+
     Time.timeScale = (Time.timeScale == 0f) ? 1f : 0f;
-    Debug.Log("Game Over!");
   }
 }

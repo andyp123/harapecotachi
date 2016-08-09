@@ -77,6 +77,19 @@
           "text": "ポーズ"
         }
       ]
+    },
+    {
+      "key": "LOC_GAME_OVER",
+      "languages": [
+        {
+          "languageCode": "en",
+          "text": "Game Over"
+        },
+        {
+          "languageCode": "ja",
+          "text": "ゲームオーバー"
+        }
+      ]
     }
   ]
 }
