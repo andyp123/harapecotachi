@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11435330}
   - 114: {fileID: 114000011320903910}
   m_Layer: 0
-  m_Name: Tower_2
+  m_Name: TowerBomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerTop: {fileID: 159462}
-  _bombPrefab: {fileID: 1000010857804868, guid: 4b23266027b26bc48991389b33621790,
+  _weaponPrefab: {fileID: 1000010857804868, guid: 4b23266027b26bc48991389b33621790,
     type: 2}
   _rotationSpeed: 240
   _shotDamage: 5

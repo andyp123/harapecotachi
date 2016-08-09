@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TowerBomb : Tower
+public class TowerArrow : Tower
 {
-
   public GameObject _towerTop;
   public GameObject _weaponPrefab;
   public float _rotationSpeed = 60f; // degrees per second
@@ -15,10 +14,9 @@ public class TowerBomb : Tower
 
   static float _angleThreshold = 5f; // turret aiming direction must be within this amount of the angle to target
 
-  Sensor _sensor = null;
+  private Sensor _sensor = null;
 
   Vector3 _attackPosition = Vector3.zero;
-
 
   void Awake ()
   {
@@ -44,13 +42,13 @@ public class TowerBomb : Tower
   {
     Vector3 shotStartPosition = transform.position + Vector3.up * 2f;
     Vector3 attackPosition = _attackPosition + Vector3.up * 0.25f;
-    attackPosition += new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)) * _shotInaccuracy;
+    attackPosition += new Vector3(Random.value, 0, Random.value) * _shotInaccuracy;
 
-    GameObject weapon = GameObject.Instantiate(_weaponPrefab, shotStartPosition, Quaternion.identity) as GameObject;
+    GameObject weapon = GameObject.Instantiate(_weaponPrefab, shotStartPosition, _towerTop.transform.rotation) as GameObject;
     BallisticPhysics physics = weapon.gameObject.GetComponent<BallisticPhysics>();
     if (physics != null)
     {
-      float maxHeight = shotStartPosition.y * 1.5f;
+      float maxHeight = shotStartPosition.y;// * 1.5f;
       Vector3 fireVelocity;
       float gravity;
       if (Utility.SolveBallisticArc (shotStartPosition, attackPosition, _shotTimeToTarget, maxHeight, out fireVelocity, out gravity))
@@ -63,7 +61,7 @@ public class TowerBomb : Tower
     _nextAttackEnableTime = Time.time + _shotDelay;
   }
 
-  void Update ()
+  void Update()
   {
     if (_target == null)
     {
@@ -82,16 +80,6 @@ public class TowerBomb : Tower
       {
         _target = null;
       }
-    }
-  }
-
-  void OnDrawGizmos ()
-  {
-    if (_target != null)
-    {
-      Debug.DrawLine(transform.position, _target.transform.position, Color.gray);
-      if (_attackIsAimed)
-        Debug.DrawLine(transform.position, _attackPosition, Color.red);
     }
   }
 }

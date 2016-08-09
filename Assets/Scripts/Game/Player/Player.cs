@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
   public float _moveSpeed = 5f;
   public Sensor _objectPlacementSensor;
+  public string _towerType = "ARROW_TOWER"; // TODO: add menu for selecting this
 
   void Awake ()
   {
@@ -42,7 +43,7 @@ public class Player : MonoBehaviour
       {
         // build tower at node
         Transform nt = node.transform;
-        Game.Instance.AssetManager.InstantiatePrefab("BOMB_TOWER", nt.position, nt.rotation);
+        Game.Instance.AssetManager.InstantiatePrefab(_towerType, nt.position, nt.rotation);
         node._occupied = true;
       }
       else
