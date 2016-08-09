@@ -6,12 +6,14 @@ public class Bomb : MonoBehaviour
 {
   public GameObject _explosionPrefab;
 
-  void Update ()
+  void Explode ()
   {
-    if (transform.position.y < 0f)
-    {
-      GameObject.Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
-      Destroy (this.gameObject);
-    }
+    GameObject.Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+    Destroy (this.gameObject); 
+  }
+
+  void OnTriggerEnter ()
+  {
+    Explode();
   }
 }
