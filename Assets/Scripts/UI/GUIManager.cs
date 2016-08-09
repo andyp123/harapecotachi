@@ -45,7 +45,7 @@ public class GUIManager : MonoBehaviour
         if (intData != null)
         {
           t.text = intData.ToString();
-          intData.RegisterOnChange( (v) => {
+          intData.RegisterOnChangeUI( (v) => {
             t.text = v.ToString();
             });
         }
@@ -75,7 +75,7 @@ public class GUIManager : MonoBehaviour
         _valueTextComponents.Remove(key);
         GameData.Data<int> intData = GameData.GetIntData(key);
         if (intData != null)
-          intData.DeregisterOnChange();
+          intData.DeregisterOnChangeUI();
       }
     }
   }

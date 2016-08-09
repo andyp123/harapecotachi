@@ -3,9 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-// GameData.Data<int>
-// GameData.Data<string>
-
 public static class GameData
 {
   public class Data<T>
@@ -15,32 +12,58 @@ public static class GameData
     T _val;
 
     OnChange _onChange = null;
+    OnChange _onChangeUI = null;
 
     public T Value
     {
       get { return _val; }
       set
       {
+        if (ReadOnly) 
+          return;
+
         _val = value;
         if (_onChange != null)
           _onChange.Invoke(_val);
+        if (_onChangeUI != null)
+          _onChangeUI.Invoke(_val);
       }
     }
     public T Default { get; set; }
+    public bool ReadOnly { get; set; }
 
     public void Reset ()
     {
+      if (ReadOnly)
+        return;
+        
       Value = Default;
     }
 
     public void RegisterOnChange (OnChange onChange)
     {
-      _onChange = onChange;
+      if (_onChange == null)
+        _onChange = onChange;
+      else
+        Debug.LogError(string.Format("[GameData.Data<{0}>] OnChange function already registered.", typeof(T)));
     }
 
     public void DeregisterOnChange ()
     {
       _onChange = null;
+    }
+
+    public void RegisterOnChangeUI (OnChange onChange)
+    {
+      if (_onChangeUI == null)
+        _onChangeUI = onChange;
+      else
+        Debug.LogError(string.Format("[GameData.Data<{0}>] OnChange UI function already registered.", typeof(T)));
+    }
+
+    public void DeregisterOnChangeUI ()
+    {
+      _onChangeUI = null;
     }
 
     public override string ToString ()
@@ -60,7 +83,7 @@ public static class GameData
   }
 
   // INT VALUES
-  public static void AddIntData (string key, int initialValue, int defaultValue = 0)
+  public static Data<int> AddIntData (string key, int initialValue, int defaultValue = 0)
   {
     if (!_intData.ContainsKey(key))
     {
@@ -68,9 +91,12 @@ public static class GameData
       data.Value = initialValue;
       data.Default = defaultValue;
       _intData.Add(key, data);
+      return data;
     }
     else
       Debug.LogError(string.Format("[GameData] Int data '{0}' is already registered.", key));
+
+    return null;
   }
 
   public static Data<int> GetIntData (string key)
@@ -84,7 +110,7 @@ public static class GameData
   }
 
   // FLOAT VALUES
-  public static void AddFloatData (string key, float initialValue, float defaultValue = 0f)
+  public static Data<float> AddFloatData (string key, float initialValue, float defaultValue = 0f)
   {
     if (!_floatData.ContainsKey(key))
     {
@@ -92,9 +118,12 @@ public static class GameData
       data.Value = initialValue;
       data.Default = defaultValue;
       _floatData.Add(key, data);
+      return data;
     }
     else
       Debug.LogError(string.Format("[GameData] Float data '{0}' is already registered.", key));
+  
+    return null;
   }
 
   public static Data<float> GetFloatData (string key)
