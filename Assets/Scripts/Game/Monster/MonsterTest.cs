@@ -22,6 +22,9 @@ public class MonsterTest : Monster
     if (_pathMover.AtPathEnd())
     {
       Destroy(gameObject);
+      GameData.Data<int> chances = GameData.GetIntData("VAL_CHANCES");
+      if (chances != null)
+        chances.Value--;
     }
   }
 

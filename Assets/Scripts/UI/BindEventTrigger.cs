@@ -58,6 +58,7 @@ public static class DelegateFunctions
     GameData.GetIntData("VAL_CHANCES").Reset();
 
     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    Time.timeScale = 1f;
   }
 
   public static void TogglePause (BaseEventData data)
