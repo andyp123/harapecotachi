@@ -44,7 +44,7 @@ public class TowerBomb : Tower
   void AttackTarget ()
   {
     Vector3 shotStartPosition = transform.position + Vector3.up * 2f;
-    Vector3 attackPosition = _attackPosition + Vector3.up * 0.25f;
+    Vector3 attackPosition = _attackPosition + Vector3.up * 0.5f;
     attackPosition += new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)) * _shotInaccuracy;
 
     GameObject weapon = GameObject.Instantiate(_weaponPrefab, shotStartPosition, _towerTop.transform.rotation) as GameObject;
