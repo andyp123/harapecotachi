@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 437496}
   - 114: {fileID: 11435330}
-  - 114: {fileID: 11473794}
+  - 114: {fileID: 114000010476911608}
   m_Layer: 0
   m_Name: TowerArrow
   m_TagString: Untagged
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de7dc5207d84324b9b46a2d643bb963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sensorRadius: 6
+  _sensorRadius: 6.5
 --- !u!114 &11435330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -219,27 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30f10a370d6ce549a4dab1c9538e60c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11473794
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ad35eeae9ef34b4db0ce5ab0623017a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _range: 5
-  _rangeIndicator: {fileID: 1000011514266190}
-  _towerTop: {fileID: 159462}
-  _weaponPrefab: {fileID: 1000010857804868, guid: 2cebf30f03fa2d44392a7d7ba6ba32dc,
-    type: 2}
-  _rotationSpeed: 240
-  _shotDamage: 0.75
-  _shotDelay: 1
-  _shotTimeToTarget: 0.15
-  _shotInaccuracy: 0
 --- !u!136 &13687908
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -249,8 +228,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 6
-  m_Height: 20
+  m_Radius: 6.5
+  m_Height: 21
   m_Direction: 1
   m_Center: {x: 0, y: 4, z: 0}
 --- !u!1001 &100100000
@@ -330,3 +309,25 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011514266190}
   m_Mesh: {fileID: 4300002, guid: b3beed8ff928508478a2aca8b488eb0e, type: 3}
+--- !u!114 &114000010476911608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b02bf498525e244b30b99fc6957513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _range: 5
+  _rangeIndicator: {fileID: 1000011514266190}
+  _towerTop: {fileID: 159462}
+  _weaponPrefab: {fileID: 1000010857804868, guid: 2cebf30f03fa2d44392a7d7ba6ba32dc,
+    type: 2}
+  _rotationSpeed: 220
+  _shotArcHeightOffset: 0
+  _shotDamage: 0.75
+  _shotDelay: 1
+  _shotTimeToTarget: 0.2
+  _shotInaccuracy: 0

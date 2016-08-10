@@ -1954,6 +1954,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 11497570, guid: 210419cdd78042048a3a08b84f04ca30, type: 2}
+      propertyPath: _towerType
+      value: BOMB_TOWER
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 210419cdd78042048a3a08b84f04ca30, type: 2}
   m_IsPrefabParent: 0
@@ -3237,8 +3241,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.1
+  far clip plane: 100
   field of view: 60
   orthographic: 1
   orthographic size: 8

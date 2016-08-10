@@ -39,7 +39,7 @@ public class Explosion : MonoBehaviour
 
         DamageInfo info = new DamageInfo();
         info.baseDamage = _damage * damageScale;
-        info.knockbackForce = info.baseDamage * Random.Range(1f, 2f);
+        info.knockbackForce = info.baseDamage * Random.Range(2f, 5f);
         info.knockbackDir = (go.transform.position - transform.position).normalized;
         info.damageType = DamageType.Explosive;
 
