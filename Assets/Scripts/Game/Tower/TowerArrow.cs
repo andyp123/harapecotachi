@@ -20,6 +20,7 @@ public class TowerArrow : Tower
 
   void Awake ()
   {
+    _rangeIndicator.transform.localScale = Vector3.one * _range;
     _sensor = gameObject.GetComponentInChildren<Sensor>();
   }
 

@@ -22,6 +22,7 @@ public class TowerBomb : Tower
 
   void Awake ()
   {
+    _rangeIndicator.transform.localScale = Vector3.one * _range;
     _sensor = gameObject.GetComponentInChildren<Sensor>();
   }
 
@@ -46,7 +47,7 @@ public class TowerBomb : Tower
     Vector3 attackPosition = _attackPosition + Vector3.up * 0.25f;
     attackPosition += new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)) * _shotInaccuracy;
 
-    GameObject weapon = GameObject.Instantiate(_weaponPrefab, shotStartPosition, Quaternion.identity) as GameObject;
+    GameObject weapon = GameObject.Instantiate(_weaponPrefab, shotStartPosition, _towerTop.transform.rotation) as GameObject;
     BallisticPhysics physics = weapon.gameObject.GetComponent<BallisticPhysics>();
     if (physics != null)
     {
