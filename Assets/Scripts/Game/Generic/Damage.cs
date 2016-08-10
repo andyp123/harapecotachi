@@ -3,6 +3,7 @@ using System.Collections;
 
 public enum DamageType
 {
+  Explosive,
   Ballistic,
   Fire,
   Ice,
@@ -17,11 +18,11 @@ public class DamageInfo
   // knock back force
   // shield break
   // damage amount
-  float baseDamage;
-  float knockbackForce;
-  Vector3 knockbackDir;
-  DamageType damageType;
-  GameObject originator;
+  public float baseDamage;
+  public float knockbackForce;
+  public Vector3 knockbackDir;
+  public DamageType damageType;
+  public GameObject originator;
 }
 
 public class Damage : MonoBehaviour
@@ -42,26 +43,13 @@ public class Damage : MonoBehaviour
     _healthMax = _health;
   }
 
-  public float ApplyDamage (float damage, Vector3 dir)
+  public void ApplyDamage (DamageInfo info)
   {
-    float damageTaken = _health;
-    _health = Mathf.Clamp(_health - damage, 0f, _healthMax);
-    damageTaken = damageTaken - _health;
+    _health = Mathf.Clamp(_health - info.baseDamage, 0f, _healthMax);
 
-    if (_physics)
+    if (info.knockbackForce > 0f && _physics != null)
     {
-      _physics.AddForce(dir * damageTaken * Random.Range(1f, 2f));
+      _physics.AddForce(info.knockbackDir * info.knockbackForce);
     }
-
-    return damageTaken;
-  }
-
-  public float ApplyDamage (float damage)
-  {
-    float damageTaken = _health;
-    _health = Mathf.Clamp(_health - damage, 0f, _healthMax);
-    damageTaken = damageTaken - _health;
-
-    return damageTaken;
   }
 }

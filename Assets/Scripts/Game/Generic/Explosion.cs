@@ -22,6 +22,7 @@ public class Explosion : MonoBehaviour
 
   IEnumerator Explode ()
   {
+    // TODO: this allows the sensor time to gather targets (which is why a spherecast might be better!)
     yield return new WaitForSeconds(0.05f);
 
     // get nearest n enemies (might want to change the sensor for a sphere cast instead?)
@@ -35,8 +36,14 @@ public class Explosion : MonoBehaviour
       if (damage != null)
       {
         float damageScale = (_scaleDamageByDistance) ? 1f - (t.sqrDistance / (_radius * _radius)) : 1f;
-        Vector3 dir = (go.transform.position - transform.position).normalized;
-        damage.ApplyDamage(_damage * damageScale, dir);
+
+        DamageInfo info = new DamageInfo();
+        info.baseDamage = _damage * damageScale;
+        info.knockbackForce = info.baseDamage * Random.Range(1f, 2f);
+        info.knockbackDir = (go.transform.position - transform.position).normalized;
+        info.damageType = DamageType.Explosive;
+
+        damage.ApplyDamage(info);
       }
     }
 
