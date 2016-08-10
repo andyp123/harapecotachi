@@ -18,11 +18,11 @@ public class DamageInfo
   // knock back force
   // shield break
   // damage amount
-  public float baseDamage;
-  public float knockbackForce;
-  public Vector3 knockbackDir;
-  public DamageType damageType;
-  public GameObject originator;
+  public float baseDamage = 0f;
+  public float knockbackForce = 0f;
+  public Vector3 knockbackDir = Vector3.zero;
+  public DamageType damageType = DamageType.Ballistic;
+  public GameObject originator = null;
 }
 
 public class Damage : MonoBehaviour

@@ -8,7 +8,8 @@ public class Bomb : MonoBehaviour
 
   void Explode ()
   {
-    GameObject.Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+    if (_explosionPrefab != null)
+      GameObject.Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
     Destroy (this.gameObject); 
   }
 

@@ -326,7 +326,7 @@ MonoBehaviour:
   _weaponPrefab: {fileID: 1000010857804868, guid: 4b23266027b26bc48991389b33621790,
     type: 2}
   _rotationSpeed: 240
-  _shotDamage: 5
+  _shotDamage: 2
   _shotDelay: 2
   _shotTimeToTarget: 1
   _shotInaccuracy: 0.1
