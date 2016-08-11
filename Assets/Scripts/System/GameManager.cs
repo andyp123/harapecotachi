@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
       });
   }
 
+  public GameObject GetNearestPlayer (Vector3 position, float radius)
+  {
+    return null;
+  }
+
   public void SetGameOver ()
   {
     // TODO: this is shit, so change it once a better solution is ready
