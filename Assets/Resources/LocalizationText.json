@@ -40,6 +40,19 @@
       ]
     },
     {
+      "key": "LOC_MONEY",
+      "languages": [
+        {
+          "languageCode": "en",
+          "text": "Money:"
+        },
+        {
+          "languageCode": "ja",
+          "text": "お金："
+        }
+      ]
+    },
+    {
       "key": "LOC_RESTART",
       "languages": [
         {
