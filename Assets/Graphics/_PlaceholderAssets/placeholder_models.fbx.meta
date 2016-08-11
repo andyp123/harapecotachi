@@ -9,21 +9,31 @@ ModelImporter:
     100002: placeholder_player
     100004: placeholder_tower_base
     100006: placeholder_tower_top
+    100008: placeholder_money
+    100010: placeholder_tower_range
     400000: //RootNode
     400002: placeholder_player
     400004: placeholder_tower_base
     400006: placeholder_tower_top
+    400008: placeholder_money
+    400010: placeholder_tower_range
     2300000: //RootNode
     2300002: placeholder_player
     2300004: placeholder_tower_base
     2300006: placeholder_tower_top
+    2300008: placeholder_money
+    2300010: placeholder_tower_range
     3300000: //RootNode
     3300002: placeholder_player
     3300004: placeholder_tower_base
     3300006: placeholder_tower_top
+    3300008: placeholder_money
+    3300010: placeholder_tower_range
     4300000: placeholder_player
     4300002: placeholder_tower_base
     4300004: placeholder_tower_top
+    4300006: placeholder_money
+    4300008: placeholder_tower_range
   materials:
     importMaterials: 0
     materialName: 0
