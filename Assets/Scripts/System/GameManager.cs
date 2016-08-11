@@ -11,10 +11,7 @@ public class GameManager : MonoBehaviour
     _chances = GameData.GetIntData("VAL_CHANCES");
     _chances.RegisterOnChange( (v) => {
         if (v == 0)
-        {
           SetGameOver();
-          _chances.ReadOnly = true;
-        }
       });
   }
 
