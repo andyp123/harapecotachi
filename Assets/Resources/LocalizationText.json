@@ -103,6 +103,45 @@
           "text": "ゲームオーバー"
         }
       ]
+    },
+    {
+      "key": "LOC_TOWER_TYPE",
+      "languages": [
+        {
+          "languageCode": "en",
+          "text": "Tower Type:"
+        },
+        {
+          "languageCode": "ja",
+          "text": "タワータイプ："
+        }
+      ]
+    },
+    {
+      "key": "LOC_ARROW",
+      "languages": [
+        {
+          "languageCode": "en",
+          "text": "Arrow"
+        },
+        {
+          "languageCode": "ja",
+          "text": "矢"
+        }
+      ]
+    },
+    {
+      "key": "LOC_BOMB",
+      "languages": [
+        {
+          "languageCode": "en",
+          "text": "Bomb"
+        },
+        {
+          "languageCode": "ja",
+          "text": "爆弾"
+        }
+      ]
     }
   ]
 }

@@ -57,6 +57,7 @@ public static class DelegateFunctions
     GameData.GetIntData("VAL_SPAWNED").Reset();
     GameData.GetIntData("VAL_CHANCES").Reset();
 
+    Game.Instance.GameManager.Reset();
     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     Time.timeScale = 1f;
   }

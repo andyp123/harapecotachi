@@ -10,13 +10,19 @@ public class GameManager : MonoBehaviour
 
   void Awake ()
   {
-    _players = new List<Player>();
+    _players = new List<Player>(2);
 
     _chances = GameData.GetIntData("VAL_CHANCES");
     _chances.RegisterOnChange( (v) => {
         if (v == 0)
           SetGameOver();
       });
+  }
+
+  // should be called on level load
+  public void Reset ()
+  {
+    _players.Clear();
   }
 
   public void RegisterPlayer (Player player)

@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
   {
     if (_objectPlacementSensor == null)
       Debug.LogError("No Object Placement Node Sensor on player");
+
+    Game.Instance.GUIManager.SetGUITextValue("VAL_TOWER_TYPE", Localization.GetLocalizedText("LOC_ARROW"));
   }
   
   void Update ()
@@ -26,13 +28,25 @@ public class Player : MonoBehaviour
       transform.rotation = Quaternion.LookRotation(moveDir);
     }
 
+
+    if (Input.GetButtonDown("Fire2"))
+    {
+      CycleTowerType();
+    }
     if (Input.GetButtonDown("Fire1"))
     {
       TryBuild();
     }
   }
 
-  void TryBuild()
+  void CycleTowerType ()
+  {
+    _towerType = (_towerType == "ARROW_TOWER") ? "BOMB_TOWER" : "ARROW_TOWER";
+    string displayName = (_towerType == "ARROW_TOWER") ? Localization.GetLocalizedText("LOC_ARROW") : Localization.GetLocalizedText("LOC_BOMB");
+    Game.Instance.GUIManager.SetGUITextValue("VAL_TOWER_TYPE", displayName);
+  }
+
+  void TryBuild ()
   {
     TargetInfo targetInfo = _objectPlacementSensor.GetNearestTarget();
     GameObject nearest = (targetInfo != null) ? targetInfo.target : null;
