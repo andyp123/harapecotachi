@@ -52,4 +52,18 @@ public class Player : MonoBehaviour
       }
     }
   }
+
+  void OnTriggerEnter (Collider other)
+  {
+    GameObject go = other.gameObject.FindRoot();
+    PickupItem pickup = go.GetComponent<PickupItem>();
+    if (pickup != null)
+    {
+      if (pickup._itemType == PickupItem.ItemType.Money)
+      {
+        GameData.GetIntData("VAL_MONEY").Value += 1;
+      }
+      pickup.Collect();
+    }
+  }
 }

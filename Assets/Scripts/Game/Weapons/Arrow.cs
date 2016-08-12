@@ -17,10 +17,10 @@ public class Arrow : MonoBehaviour
       info.damageType = DamageType.Ballistic;
 
       damage.ApplyDamage(info);
-      Debug.Log("Arrow hit target!");
+      // Debug.Log("Arrow hit target!");
     }
-    else
-      Debug.Log(string.Format("Arrow missed target and hit {0}!", go.name));
+    // else
+    //   Debug.Log(string.Format("Arrow missed target and hit {0}!", go.name));
 
     Destroy(this.gameObject);
   }
