@@ -91,8 +91,9 @@ public static class Localization
   {
     if (localizationFile == null)
     {
-      string defaultPath = "Assets/Resources/LocalizationText.json";
-      localizationFile = (TextAsset)UnityEditor.AssetDatabase.LoadAssetAtPath(defaultPath, typeof(TextAsset));
+      // string defaultPath = "Assets/Resources/LocalizationText.json";
+      // localizationFile = (TextAsset)UnityEditor.AssetDatabase.LoadAssetAtPath(defaultPath, typeof(TextAsset));
+      localizationFile = Resources.Load<TextAsset>("LocalizationText");
     }
 
     if (localizationFile != null)
