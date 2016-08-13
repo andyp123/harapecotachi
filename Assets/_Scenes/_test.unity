@@ -836,6 +836,7 @@ MonoBehaviour:
   _spawnCount: 6
   _startDelay: 5
   _spawnDelay: 2
+  _moneyPot: 3
   _path: {fileID: 1282864772}
 --- !u!1 &334812585
 GameObject:
@@ -1060,6 +1061,7 @@ MonoBehaviour:
   _spawnCount: 15
   _startDelay: 0
   _spawnDelay: 1
+  _moneyPot: 5
   _path: {fileID: 109336449}
 --- !u!1 &379416653
 GameObject:
@@ -2344,6 +2346,7 @@ MonoBehaviour:
   _spawnCount: 5
   _startDelay: 0
   _spawnDelay: 1
+  _moneyPot: 6
   _path: {fileID: 583979736}
 --- !u!4 &1100348737
 Transform:
@@ -3288,6 +3291,7 @@ MonoBehaviour:
   _spawnCount: 30
   _startDelay: 0
   _spawnDelay: 0.7
+  _moneyPot: 15
   _path: {fileID: 1282864772}
 --- !u!1 &1675627757
 GameObject:
@@ -3321,6 +3325,7 @@ MonoBehaviour:
   _spawnCount: 8
   _startDelay: 1
   _spawnDelay: 0.75
+  _moneyPot: 4
   _path: {fileID: 1282864772}
 --- !u!4 &1675627759
 Transform:
