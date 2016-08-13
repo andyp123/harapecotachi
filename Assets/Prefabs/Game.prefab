@@ -62,3 +62,5 @@ MonoBehaviour:
     prefab: {fileID: 118798, guid: 729939a57cb8d58409e19d443617861f, type: 2}
   - key: PLAYER
     prefab: {fileID: 141774, guid: 210419cdd78042048a3a08b84f04ca30, type: 2}
+  - key: MONEY
+    prefab: {fileID: 1000013962557142, guid: c5f70debbc28a614a84f3d3d75d676fd, type: 2}

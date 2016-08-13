@@ -10,6 +10,11 @@ public abstract class Monster : MonoBehaviour
 
   protected virtual void Die ()
   {
+    if (money > 0)
+    {
+      Game.Instance.GameManager.DropItems(money, transform.position, 5f);
+    }
+
     GameData.Data<int> intData = GameData.GetIntData("VAL_KILLED");
     if (intData != null)
       intData.Value += 1;

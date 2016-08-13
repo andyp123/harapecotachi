@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ed5ac87441da142bd07a70e7ae5282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _friction: 0.9
+  _friction: 2
   _mass: 1
 --- !u!135 &135000013461666204
 SphereCollider:

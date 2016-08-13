@@ -59,6 +59,24 @@ public class GameManager : MonoBehaviour
     return (sqrNearestDistance < radius * radius) ? nearestPlayer : null;
   }
 
+  // TODO: this should have item array input, but for now it's just money
+  public void DropItems (int count, Vector3 position, float forceStrength)
+  {
+    string assetKey = "MONEY";
+
+    for (int i = 0; i < count; ++i)
+    {
+      GameObject go = Game.Instance.AssetManager.InstantiatePrefab(assetKey, position, Quaternion.identity);
+      SimplePhysics physics = go.GetComponent<SimplePhysics>();
+      if (physics)
+      {
+        Vector3 force = new Vector3(Random.value, 0f, Random.value);
+        force.Normalize();
+        physics.AddForce(force * forceStrength);
+      }
+    }
+  }
+
   public void SetGameOver ()
   {
     // TODO: this is shit, so change it once a better solution is ready
