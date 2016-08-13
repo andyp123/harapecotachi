@@ -31,8 +31,10 @@ public class Explosion : MonoBehaviour
     // apply damage to them
     foreach (TargetInfo t in nearestTargets)
     {
+      if (t.target == null) // TODO: the target can be null sometimes, which causes an error. This needs solving
+        continue;
       GameObject go = t.target;
-      Damage damage = go.GetComponent<Damage>();
+      Damage damage = go.GetComponent<Damage>(); 
       if (damage != null)
       {
         float damageScale = (_scaleDamageByDistance) ? 1f - (t.sqrDistance / (_radius * _radius)) : 1f;
