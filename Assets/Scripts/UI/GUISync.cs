@@ -61,41 +61,40 @@ public class GUISync : MonoBehaviour
     }
   }
 
-  bool ParseValue (string valueString, out string key, out ValueInfo info)
+  bool ParseValue (string valueString, out string guiKey, out ValueInfo info)
   {
-    // "VAL(DATA_KEY)"
-    // shorthand that uses defaults:
-    // GUI_KEY becomes "VAL_[DATA_KEY]"
-    // DATA_TYPE defaults to int
-    // AUTO_SYNC defaults to true
-
-    // "VAL(GUI_KEY, DATA_KEY, DATA_TYPE, AUTO_SYNC)"
-    // GUI_KEY: key used to access the text component through the GUIManager
+    // "VAL(DATA_KEY, DATA_TYPE, AUTO_SYNC)"
     // DATA_KEY: key used to access the data in GameData
     // DATA_TYPE: type of data represented (Int, Float, String)
     // AUTO_SYNC: bind delegate to Data object in GameData that syncs the text component to the value (true/false)
 
-    key = "";
+    // "VAL(DATA_KEY)"
+    // shorthand that uses defaults:
+    // DATA_TYPE defaults to int
+    // AUTO_SYNC defaults to true
+
+    guiKey = "";
     info = new ValueInfo();
 
     string argumentString = valueString.Substring(4, valueString.Length-5);
     string[] tokenStrings = argumentString.Split(',');
     if (tokenStrings.Length == 1)
     {
-      key = "VAL_" + tokenStrings[0];
+      guiKey = "VAL_" + tokenStrings[0];
       info.dataKey = tokenStrings[0];
       info.dataType = GameData.DataType.Int;
       info.autoSync = true;
       return true;
     }
-    if (tokenStrings.Length == 4)
+    if (tokenStrings.Length == 3)
     {
-      key = tokenStrings[0];
-      info.dataKey = tokenStrings[1];
-      info.dataType = GameData.GetDataTypeFromString(tokenStrings[2]);
-      info.autoSync = (tokenStrings[3] == "true") ? true : false;
+      guiKey = "VAL_" + tokenStrings[0];
+      info.dataKey = tokenStrings[0];
+      info.dataType = GameData.GetDataTypeFromString(tokenStrings[1]);
+      info.autoSync = (tokenStrings[2] == "true") ? true : false;
       return true;
     }
+    // TODO: add possibility of sticking a custom GUI_KEY at the end of the arguments list?
     
     Debug.LogError(string.Format("[GUISync] Failed to parse value string with incorrect number of arguments: '{0}'", valueString));
 
