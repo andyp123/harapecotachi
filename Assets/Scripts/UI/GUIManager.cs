@@ -7,15 +7,15 @@ using System.Collections.Generic;
 public class GUIManager : MonoBehaviour
 {
   Dictionary<string, Text> _localizedTextComponents;
-  Dictionary<string, Text> _valueTextComponents;
+  Dictionary<string, GUISync.ValueInfo> _valueTextComponents;
 
   void Awake ()
   {
     _localizedTextComponents = new Dictionary<string, Text>();
-    _valueTextComponents = new Dictionary<string, Text>();
+    _valueTextComponents = new Dictionary<string, GUISync.ValueInfo>();
   }
 
-  public void AddActiveTextComponents(Dictionary<string, Text> localizedComponents, Dictionary<string, Text> valueComponents)
+  public void AddActiveTextComponents(Dictionary<string, Text> localizedComponents, Dictionary<string, GUISync.ValueInfo> valueComponents)
   {
     foreach (KeyValuePair<string, Text> entry in localizedComponents)
     {
@@ -29,33 +29,28 @@ public class GUIManager : MonoBehaviour
       }
       else
       {
-        Debug.LogWarning(string.Format("The string '{0}' is already in use. Skipping this object ({1}).", key, t.gameObject.name));
+        Debug.LogWarning(string.Format("[GUIManager] The string '{0}' is already in use. Skipping this object ({1}).", key, t.gameObject.name));
       }
     }
 
-    foreach (KeyValuePair<string, Text> entry in valueComponents)
+    foreach (KeyValuePair<string, GUISync.ValueInfo> entry in valueComponents)
     {
       string key = entry.Key;
-      Text t = entry.Value;
+      GUISync.ValueInfo info = entry.Value;
+      Text t = info.textComponent;
 
       if (!_valueTextComponents.ContainsKey(key))
       {
-        _valueTextComponents.Add(key, t);
-        GameData.Data<int> intData = GameData.GetIntData(key);
-        if (intData != null)
-        {
-          t.text = intData.ToString();
-          intData.RegisterOnChangeUI( (v) => {
-            t.text = v.ToString();
-            });
-        }
+        _valueTextComponents.Add(key, info);
+        if (info.autoSync)
+          RegisterOnChangeUI(info, t);
       }
       else
-        Debug.LogWarning(string.Format("The string '{0}' is already in use. Skipping this object ({1}).", key, t.gameObject.name));
+        Debug.LogWarning(string.Format("[GUIManager] The string '{0}' is already in use. Skipping this object ({1}).", key, t.gameObject.name));
     }
   }
 
-  public void RemoveActiveTextComponents(Dictionary<string, Text> localizedComponents, Dictionary<string, Text> valueComponents)
+  public void RemoveActiveTextComponents(Dictionary<string, Text> localizedComponents, Dictionary<string, GUISync.ValueInfo> valueComponents)
   {
     foreach (KeyValuePair<string, Text> entry in localizedComponents)
     {      
@@ -66,24 +61,86 @@ public class GUIManager : MonoBehaviour
         _localizedTextComponents.Remove(key);
       }
     }
-    foreach (KeyValuePair<string, Text> entry in valueComponents)
+    foreach (KeyValuePair<string, GUISync.ValueInfo> entry in valueComponents)
     {
       string key = entry.Key;
 
       if (_valueTextComponents.ContainsKey(key))
       {
+        GUISync.ValueInfo info = entry.Value;
+        if (info.autoSync)
+          DeregisterOnChangeUI(info);
         _valueTextComponents.Remove(key);
-        GameData.Data<int> intData = GameData.GetIntData(key);
+      }
+    }
+  }
+
+  void RegisterOnChangeUI (GUISync.ValueInfo info, Text t)
+  {
+    switch (info.dataType)
+    {
+      case GameData.DataType.Int:
+        GameData.Data<int> intData = GameData.GetIntData(info.dataKey);
+        if (intData != null)
+        {
+          t.text = intData.ToString();
+          intData.RegisterOnChangeUI( (v) => {
+            t.text = v.ToString();
+            });
+        }
+        break;
+      case GameData.DataType.Float:
+        GameData.Data<float> floatData = GameData.GetFloatData(info.dataKey);
+        if (floatData != null)
+        {
+          t.text = floatData.ToString();
+          floatData.RegisterOnChangeUI( (v) => {
+            t.text = v.ToString();
+            });                
+        }
+        break;
+      case GameData.DataType.String:
+        GameData.Data<string> stringData = GameData.GetStringData(info.dataKey);
+        if (stringData != null)
+        {
+          t.text = stringData.ToString();
+          stringData.RegisterOnChangeUI( (v) => {
+            t.text = v.ToString();
+            });                
+        }
+        break;
+      default:
+        Debug.LogWarning("[GUIManager] Can't autoSync unsupported data type.");
+        break;
+    }
+  }
+
+  void DeregisterOnChangeUI (GUISync.ValueInfo info)
+  {
+    switch (info.dataType)
+    {
+      case GameData.DataType.Int:
+        GameData.Data<int> intData = GameData.GetIntData(info.dataKey);
         if (intData != null)
           intData.DeregisterOnChangeUI();
-      }
+        break;
+      case GameData.DataType.Float:
+        GameData.Data<float> floatData = GameData.GetFloatData(info.dataKey);
+        if (floatData != null)
+          floatData.DeregisterOnChangeUI();
+        break;
+      case GameData.DataType.String:
+        GameData.Data<string> stringData = GameData.GetStringData(info.dataKey);
+        if (stringData != null)
+          stringData.DeregisterOnChangeUI();
+        break;
     }
   }
 
   public void SetGUITextValue (string key, string val)
   {
     if (_valueTextComponents.ContainsKey(key))
-      _valueTextComponents[key].text = val;
+      _valueTextComponents[key].textComponent.text = val;
   }
 
   public void ApplyLanguage(string languageCode = null)

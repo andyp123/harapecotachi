@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
   {
     _players = new List<Player>(2);
 
-    _chances = GameData.GetIntData("VAL_CHANCES");
+    _chances = GameData.GetIntData("CHANCES");
     _chances.RegisterOnChange( (v) => {
         if (v == 0)
           SetGameOver();

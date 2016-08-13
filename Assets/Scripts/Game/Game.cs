@@ -35,10 +35,11 @@ public class Game : Singleton<Game>
     DontDestroyOnLoad(this.gameObject);
 
     GameData.Initialize();
-    GameData.AddIntData("VAL_SPAWNED", 0, 0);
-    GameData.AddIntData("VAL_KILLED", 0, 0);
-    GameData.AddIntData("VAL_CHANCES", 10, 10);
-    GameData.AddIntData("VAL_MONEY", 10, 10);
+    GameData.AddIntData("SPAWNED", 0, 0);
+    GameData.AddIntData("KILLED", 0, 0);
+    GameData.AddIntData("CHANCES", 10, 10);
+    GameData.AddIntData("MONEY", 10, 10);
+    GameData.AddStringData("TOWER_TYPE", "", "");
 
     Localization.LoadLocalizationFile();
 

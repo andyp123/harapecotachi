@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
   public Sensor _objectPlacementSensor;
   public string _towerType = "ARROW_TOWER"; // TODO: add menu for selecting this
 
+  GameData.Data<string> _towerTypeData;
+
   string _inputXAxis;
   string _inputZAxis;
   string _inputInteract;
@@ -25,7 +27,9 @@ public class Player : MonoBehaviour
     if (_objectPlacementSensor == null)
       Debug.LogError("No Object Placement Node Sensor on player");
 
-    Game.Instance.GUIManager.SetGUITextValue("VAL_TOWER_TYPE", Localization.GetLocalizedText("LOC_ARROW"));
+    _towerTypeData = GameData.GetStringData("TOWER_TYPE");
+
+    _towerTypeData.Value = Localization.GetLocalizedText("LOC_ARROW");
   }
   
   void Update ()
@@ -54,16 +58,23 @@ public class Player : MonoBehaviour
 
   void CycleTowerType ()
   {
-    _towerType = (_towerType == "ARROW_TOWER") ? "BOMB_TOWER" : "ARROW_TOWER";
-    string displayName = (_towerType == "ARROW_TOWER") ? Localization.GetLocalizedText("LOC_ARROW") : Localization.GetLocalizedText("LOC_BOMB");
-    Game.Instance.GUIManager.SetGUITextValue("VAL_TOWER_TYPE", displayName);
+    if (_towerType == "ARROW_TOWER")
+    {
+      _towerType = "BOMB_TOWER";
+      _towerTypeData.Value = Localization.GetLocalizedText("LOC_BOMB");
+    }
+    else
+    {
+      _towerType = "ARROW_TOWER";
+      _towerTypeData.Value = Localization.GetLocalizedText("LOC_ARROW");
+    }
   }
 
   void TryBuild ()
   {
     int towerCost = 3; // TODO: this should be retrieved from tower data or something
 
-    GameData.Data<int> money = GameData.GetIntData("VAL_MONEY");
+    GameData.Data<int> money = GameData.GetIntData("MONEY");
     if (money.Value < towerCost)
     {
       Debug.Log("Not enough money to build tower.");
@@ -98,7 +109,7 @@ public class Player : MonoBehaviour
     {
       if (pickup._itemType == PickupItem.ItemType.Money)
       {
-        GameData.GetIntData("VAL_MONEY").Value += 1;
+        GameData.GetIntData("MONEY").Value += 1;
       }
       pickup.Collect();
     }

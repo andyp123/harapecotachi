@@ -15,7 +15,7 @@ public abstract class Monster : MonoBehaviour
       Game.Instance.GameManager.DropItems(money, transform.position, 5f);
     }
 
-    GameData.Data<int> intData = GameData.GetIntData("VAL_KILLED");
+    GameData.Data<int> intData = GameData.GetIntData("KILLED");
     if (intData != null)
       intData.Value += 1;
     Destroy (gameObject);

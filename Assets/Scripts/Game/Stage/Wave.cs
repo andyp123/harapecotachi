@@ -51,7 +51,7 @@ public class Wave : MonoBehaviour
       GameObject monster = assetManager.InstantiatePrefab(_monsterType, Vector3.zero, Quaternion.identity);
       monster.GetComponent<Monster>().money = money;
 
-      GameData.Data<int> intData = GameData.GetIntData("VAL_SPAWNED");
+      GameData.Data<int> intData = GameData.GetIntData("SPAWNED");
       if (intData != null)
         intData.Value += 1;
 

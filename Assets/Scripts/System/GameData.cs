@@ -5,6 +5,30 @@ using System.Collections.Generic;
 
 public static class GameData
 {
+  // supported types should go in here
+  public enum DataType
+  {
+    Int,
+    Float,
+    String,
+    Unknown
+  }
+
+  public static DataType GetDataTypeFromString (string typeString)
+  {
+    switch (typeString)
+    {
+      case "int":
+        return DataType.Int;
+      case "float":
+        return DataType.Float;
+      case "string":
+        return DataType.String;
+    }
+
+    return DataType.Unknown;
+  }
+
   public class Data<T>
   {
     public delegate void OnChange(T v);
@@ -75,11 +99,13 @@ public static class GameData
 
   static Dictionary<string, Data<int>> _intData;
   static Dictionary<string, Data<float>> _floatData;
+  static Dictionary<string, Data<string>> _stringData;
 
   public static void Initialize ()
   {
     _intData = new Dictionary<string, Data<int>>();
     _floatData = new Dictionary<string, Data<float>>();
+    _stringData = new Dictionary<string, Data<string>>();
   }
 
   // INT VALUES
@@ -133,6 +159,33 @@ public static class GameData
       return data;
 
     Debug.LogError(string.Format("[GameData] Float data '{0}' is not registered.", key));
+    return null;
+  }
+
+  // STRING VALUES
+  public static Data<string> AddStringData (string key, string initialValue, string defaultValue = "")
+  {
+    if (!_stringData.ContainsKey(key))
+    {
+      Data<string> data = new Data<string>();
+      data.Value = initialValue;
+      data.Default = defaultValue;
+      _stringData.Add(key, data);
+      return data;
+    }
+    else
+      Debug.LogError(string.Format("[GameData] String data '{0}' is already registered.", key));
+  
+    return null;
+  }
+
+  public static Data<string> GetStringData (string key)
+  {
+    Data<string> data;
+    if (_stringData.TryGetValue(key, out data))
+      return data;
+
+    Debug.LogError(string.Format("[GameData] String data '{0}' is not registered.", key));
     return null;
   }
 }
