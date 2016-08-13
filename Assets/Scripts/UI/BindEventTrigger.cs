@@ -56,6 +56,7 @@ public static class DelegateFunctions
     GameData.GetIntData("VAL_KILLED").Reset();
     GameData.GetIntData("VAL_SPAWNED").Reset();
     GameData.GetIntData("VAL_CHANCES").Reset();
+    GameData.GetIntData("VAL_MONEY").Reset();
 
     Game.Instance.GameManager.Reset();
     SceneManager.LoadScene(SceneManager.GetActiveScene().name);

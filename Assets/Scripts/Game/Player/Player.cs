@@ -48,6 +48,15 @@ public class Player : MonoBehaviour
 
   void TryBuild ()
   {
+    int towerCost = 3; // TODO: this should be retrieved from tower data or something
+
+    GameData.Data<int> money = GameData.GetIntData("VAL_MONEY");
+    if (money.Value < towerCost)
+    {
+      Debug.Log("Not enough money to build tower.");
+      return;
+    }
+
     TargetInfo targetInfo = _objectPlacementSensor.GetNearestTarget();
     GameObject nearest = (targetInfo != null) ? targetInfo.target : null;
     if (nearest != null)
@@ -59,6 +68,7 @@ public class Player : MonoBehaviour
         Transform nt = node.transform;
         Game.Instance.AssetManager.InstantiatePrefab(_towerType, nt.position, nt.rotation);
         node._occupied = true;
+        money.Value -= towerCost;
       }
       else
       {

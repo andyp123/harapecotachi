@@ -42,7 +42,7 @@ public class PickupItem : MonoBehaviour
       Vector3 dir = _target.transform.position - transform.position;
       float sqrDistance = dir.sqrMagnitude;
       if (sqrDistance < _sqrAttractionRadius)
-        _physics.AddForce(dir * _attractionForce * sqrDistance / _sqrAttractionRadius);
+        _physics.AddForce(dir * _attractionForce * sqrDistance / _sqrAttractionRadius * Time.deltaTime);
     }
   }
 
