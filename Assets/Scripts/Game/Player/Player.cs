@@ -7,6 +7,19 @@ public class Player : MonoBehaviour
   public Sensor _objectPlacementSensor;
   public string _towerType = "ARROW_TOWER"; // TODO: add menu for selecting this
 
+  string _inputXAxis;
+  string _inputZAxis;
+  string _inputInteract;
+  string _inputInventory;
+
+  public void SetPlayerID (int id)
+  {
+    _inputXAxis = string.Format("P{0}_MoveX", id);
+    _inputZAxis = string.Format("P{0}_MoveZ", id);
+    _inputInteract = string.Format("P{0}_Interact", id);
+    _inputInventory = string.Format("P{0}_Inventory", id);
+  }
+
   void Awake ()
   {
     if (_objectPlacementSensor == null)
@@ -17,8 +30,8 @@ public class Player : MonoBehaviour
   
   void Update ()
   {
-    float moveX = Input.GetAxis("Horizontal");
-    float moveZ = Input.GetAxis("Vertical");
+    float moveX = Input.GetAxis(_inputXAxis);
+    float moveZ = Input.GetAxis(_inputZAxis);
     Vector3 moveDir = new Vector3(moveX, 0f, moveZ);
     if (moveDir.sqrMagnitude > 1f)
       moveDir.Normalize();
@@ -29,11 +42,11 @@ public class Player : MonoBehaviour
     }
 
 
-    if (Input.GetButtonDown("Fire2"))
+    if (Input.GetButtonDown(_inputInventory))
     {
       CycleTowerType();
     }
-    if (Input.GetButtonDown("Fire1"))
+    if (Input.GetButtonDown(_inputInteract))
     {
       TryBuild();
     }

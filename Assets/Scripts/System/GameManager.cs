@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     }
 
     _players.Add(player);
+    player.SetPlayerID(_players.Count);
     Debug.Log(string.Format("[GameManager] Registered Player {0}.", _players.Count));
   }
 
