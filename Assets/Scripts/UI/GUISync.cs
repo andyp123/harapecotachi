@@ -63,7 +63,7 @@ public class GUISync : MonoBehaviour
 
   bool ParseValue (string valueString, out string guiKey, out ValueInfo info)
   {
-    // "VAL(DATA_KEY, DATA_TYPE, AUTO_SYNC)"
+    // "VAL(DATA_KEY,DATA_TYPE,AUTO_SYNC)"
     // DATA_KEY: key used to access the data in GameData
     // DATA_TYPE: type of data represented (Int, Float, String)
     // AUTO_SYNC: bind delegate to Data object in GameData that syncs the text component to the value (true/false)
@@ -94,7 +94,6 @@ public class GUISync : MonoBehaviour
       info.autoSync = (tokenStrings[2] == "true") ? true : false;
       return true;
     }
-    // TODO: add possibility of sticking a custom GUI_KEY at the end of the arguments list?
     
     Debug.LogError(string.Format("[GUISync] Failed to parse value string with incorrect number of arguments: '{0}'", valueString));
 
