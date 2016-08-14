@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+// TODO: Might it be faster to use the matrix form for hermite interpolation: http://cubic.org/docs/hermite.htm
+
 [System.Serializable]
 public class Path : MonoBehaviour
 {
@@ -110,6 +112,11 @@ public class Path : MonoBehaviour
 
   public Vector3 GetPositionAtDistance(float distance)
   {
+    if (_points.Count < 1)
+      return Vector3.zero;
+    if (_points.Count < 2)
+      return _points[0];
+
     float totalLength = 0f;
 
     for (int i = 0; i < _points.Count; ++i)
@@ -128,30 +135,62 @@ public class Path : MonoBehaviour
     return _points[_points.Count - 1];
   }
 
-  void OnDrawGizmos ()
+  public Vector3 GetTangentAtDistance(float distance)
   {
+    if (_points.Count < 2)
+      return Vector3.forward;
+
+    float totalLength = 0f;
+
+    for (int i = 0; i < _points.Count; ++i)
+    {
+      float sectionLength = _distanceTables[i].Length;
+      if (totalLength + sectionLength > distance)
+      {
+        float t = _distanceTables[i].GetT(distance - totalLength);
+        Vector3[] interpolateInput = GetInterpolateInput(i);
+        return HermiteTangent(interpolateInput, t);
+      }
+
+      totalLength += sectionLength;
+    }
+
+    return (_points[_points.Count-1] - _points[_points.Count-2]).normalized;
+  }
+
+  public void GetPositionAndTangentAtDistance(float distance, out Vector3 position, out Vector3 tangent)
+  {
+    position = Vector3.zero;
+    tangent = Vector3.forward;
+
     if (_points.Count < 2)
       return;
 
-    float increment = 1f / 10;
+    float totalLength = 0f;
 
-    Gizmos.color = Color.white;
-    for (int i = 0; i < _points.Count - 1; ++i)
+    for (int i = 0; i < _points.Count; ++i)
     {
-      Vector3[] interpolateInput = GetInterpolateInput(i);
-
-      Vector3 a = interpolateInput[0];
-      for (float t = increment; t < 1f; t += increment)
+      float sectionLength = _distanceTables[i].Length;
+      if (totalLength + sectionLength > distance)
       {
-        Vector3 b = HermiteInterpolate(interpolateInput, t);
-        Gizmos.DrawLine(a, b);
-        a = b;
+        float t = _distanceTables[i].GetT(distance - totalLength);
+        Vector3[] interpolateInput = GetInterpolateInput(i);
+        position = HermiteInterpolate(interpolateInput, t);
+        tangent = HermiteTangent(interpolateInput, t);
+        return;
       }
-      Gizmos.DrawLine(a, interpolateInput[1]);
+
+      totalLength += sectionLength;
     }
+
+    // distance should be the same as curve length
+    position = _points[_points.Count - 1];
+    tangent = (_points[_points.Count-1] - _points[_points.Count-2]).normalized;
   }
 
   // save a small amount of uneccessary calculation for each point along a segment
+  // p0, p1 : start / end point
+  // tangent0, tangent1 : start / end tangent
   public Vector3[] GetInterpolateInput (int segmentIndex)
   {
     int i = segmentIndex;
@@ -169,22 +208,6 @@ public class Path : MonoBehaviour
   }
 
   // t : 0-1 position along curve
-  // p0, p1 : start / end point
-  // tangent0, tangent1 : start / end tangent
-  public Vector3 HermiteInterpolate (Vector3 p0, Vector3 p1, Vector3 tangent0, Vector3 tangent1, float t)
-  { 
-    float t2 = t * t;
-    float t3 = t * t2;
-  
-    Vector3 point;
-    point  = p0 * ( 2f * t3 - 3f * t2 + 1f);
-    point += p1 * (-2f * t3 + 3f * t2);
-    point += tangent0 * (t3 - 2f * t2 + t);
-    point += tangent1 * (t3 - t2);
-
-    return point;
-  }
-
   // interpolate input should have same format as input to above (p0, p1, tangent0, tangent1)
   public Vector3 HermiteInterpolate (Vector3[] interpolateInput, float t)
   {
@@ -198,6 +221,20 @@ public class Path : MonoBehaviour
     point += interpolateInput[3] * (t3 - t2);
 
     return point;   
+  }
+
+  // using the first derivative of the formula to get a point, we can get the tangent
+  public Vector3 HermiteTangent (Vector3[] interpolateInput, float t)
+  {
+    float t2 = t * t;
+
+    Vector3 tangent;
+    tangent  = interpolateInput[0] * ( 6f * t2 - 6f * t);
+    tangent += interpolateInput[1] * (-6f * t2 + 6f * t);
+    tangent += interpolateInput[2] * (3f * t2 - 4f * t + 1f);
+    tangent += interpolateInput[3] * (3f * t2 - 2f * t);
+
+    return tangent.normalized;     
   }
 
   private void InitializeDistanceTables ()
@@ -229,5 +266,28 @@ public class Path : MonoBehaviour
     }
 
     _lengthValid = false;
+  }
+
+  void OnDrawGizmos ()
+  {
+    if (_points.Count < 2)
+      return;
+
+    float increment = 1f / 10;
+
+    Gizmos.color = Color.white;
+    for (int i = 0; i < _points.Count - 1; ++i)
+    {
+      Vector3[] interpolateInput = GetInterpolateInput(i);
+
+      Vector3 a = interpolateInput[0];
+      for (float t = increment; t < 1f; t += increment)
+      {
+        Vector3 b = HermiteInterpolate(interpolateInput, t);
+        Gizmos.DrawLine(a, b);
+        a = b;
+      }
+      Gizmos.DrawLine(a, interpolateInput[1]);
+    }
   }
 }

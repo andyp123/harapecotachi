@@ -21,17 +21,12 @@ public class PathMover : MonoBehaviour
       _distance += _speed * Time.deltaTime;
       if (_distance > _path.Length)
         _distance = _path.Length;
-        
-      Vector3 pos = _path.GetPositionAtDistance(_distance);
-      Vector3 prevPos = transform.position;
-      transform.position = pos;
 
-      // rotation really should be set by a _path.GetRotationAtDistance function
-      if (pos != prevPos)
-      {
-        Vector3 dir = pos - prevPos;
-        transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
-      }
+      Vector3 pos;
+      Vector3 dir;
+      _path.GetPositionAndTangentAtDistance(_distance, out pos, out dir);
+      transform.position = pos;
+      transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
     }
   }
 
