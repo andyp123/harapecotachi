@@ -12,7 +12,7 @@ public class SubdividedPath : MonoBehaviour
   }
 
   public Path _path;
-  public float _subdivisionSize = 1f; // this is used as input for initialization only! not likely to be correct
+  public float _subdivisionSize = 1f; // will get changed slightly through initialization
 
   List<SubdividedPath.PathPoint> _points;
   float _length = 0f; // will be the same as the original path length
@@ -35,6 +35,7 @@ public class SubdividedPath : MonoBehaviour
       if (_points != null)
       {
         _length = _path.Length;
+        _subdivisionSize = (_points[1].position - _points[0].position).magnitude; // get actual subdivisionSize
         _initialized = true;
       }
     }
@@ -43,6 +44,9 @@ public class SubdividedPath : MonoBehaviour
 
   public PathPoint GetInterpolatedPointAtDistance (float distance)
   {
+    if (_initialized)
+      debug.LogError("[SubdividedPath] Cannot get point from a path that has not been initialized.");
+
     distance = Mathf.Clamp(distance, 0f, _length);
     if (distance == 0f)
       return _points[0]; // TODO: check this is returned by value (copy)
