@@ -110,7 +110,7 @@ public class Path : MonoBehaviour
     _lengthValid = true;
   }
 
-  public Vector3 GetPositionAtDistance(float distance)
+  public Vector3 GetPositionAtDistance (float distance)
   {
     if (_points.Count < 1)
       return Vector3.zero;
@@ -135,7 +135,7 @@ public class Path : MonoBehaviour
     return _points[_points.Count - 1];
   }
 
-  public Vector3 GetTangentAtDistance(float distance)
+  public Vector3 GetTangentAtDistance (float distance)
   {
     if (_points.Count < 2)
       return Vector3.forward;
@@ -158,7 +158,7 @@ public class Path : MonoBehaviour
     return (_points[_points.Count-1] - _points[_points.Count-2]).normalized;
   }
 
-  public void GetPositionAndTangentAtDistance(float distance, out Vector3 position, out Vector3 tangent)
+  public void GetPositionAndTangentAtDistance (float distance, out Vector3 position, out Vector3 tangent)
   {
     position = Vector3.zero;
     tangent = Vector3.forward;
@@ -185,7 +185,7 @@ public class Path : MonoBehaviour
 
     // distance should be the same as curve length
     position = _points[_points.Count - 1];
-    tangent = (_points[_points.Count-1] - _points[_points.Count-2]).normalized;
+    tangent = (_points[_points.Count - 1] - _points[_points.Count-2]).normalized;
   }
 
   // save a small amount of uneccessary calculation for each point along a segment
@@ -237,6 +237,62 @@ public class Path : MonoBehaviour
     return tangent.normalized;     
   }
 
+  public List<SubdividedPath.PathPoint> GetEvenlySubdividedPath (float subdivisionLength)
+  {
+    List<SubdividedPath.PathPoint> subdividedPoints = null;
+
+    if (_points.Count < 2)
+      return null;
+
+    float numSubdivisionsFloat = Length / subdivisionLength;
+    int numSubdivisions = (int)Mathf.Floor(numSubdivisionsFloat);
+    subdivisionLength = Length / numSubdivisions;
+    subdividedPoints = new List<SubdividedPath.PathPoint>(numSubdivisions + 1);
+
+    // Debug.Log(Length);
+
+    // loop through curve segments, get all points per segment until distance exceeds the segment length
+    float segmentStartDistance = 0f;
+    float currentDistance = 0f;
+    Vector3[] interpolateInput;
+    for (int i = 0; i < _points.Count - 1; ++i)
+    {
+      interpolateInput = GetInterpolateInput(i);
+      DistanceTable distanceTable = _distanceTables[i];
+      // Debug.Log(string.Format("i: {0}, Length: {1}", i, distanceTable.Length));
+
+      int numPointsInSegment = (int)Mathf.Floor((distanceTable.Length - (currentDistance - segmentStartDistance)) / subdivisionLength) + 1;
+      for (int j = 0; j < numPointsInSegment; ++j)
+      {
+        float t = distanceTable.GetT(currentDistance - segmentStartDistance);
+        // Debug.Log(string.Format("currentDistance: {0}, segmentStartDistance: {1}, t: {2}", currentDistance, segmentStartDistance, t));
+
+        SubdividedPath.PathPoint pathPoint = new SubdividedPath.PathPoint();
+        pathPoint.position = HermiteInterpolate(interpolateInput, t);
+        pathPoint.tangent = HermiteTangent(interpolateInput, t);
+        pathPoint.rotation = Quaternion.LookRotation(pathPoint.tangent);
+        subdividedPoints.Add(pathPoint);
+
+        currentDistance += subdivisionLength;
+      }
+      segmentStartDistance += distanceTable.Length;
+
+      // add last point, but don't assume it wasn't added
+      if (subdividedPoints.Count == numSubdivisions)
+      {
+        // Debug.Log("Adding last point!");
+        SubdividedPath.PathPoint pathPoint = new SubdividedPath.PathPoint();
+        pathPoint.position = _points[_points.Count - 1];
+        pathPoint.tangent = HermiteTangent(interpolateInput, 1f);
+        pathPoint.rotation = Quaternion.LookRotation(pathPoint.tangent);
+        subdividedPoints.Add(pathPoint);     
+      }
+    }
+    
+    // Debug.Log(currentDistance);
+    return subdividedPoints;
+  }
+
   private void InitializeDistanceTables ()
   {
     _distanceTables = new List<DistanceTable>(_points.Count);
@@ -268,26 +324,26 @@ public class Path : MonoBehaviour
     _lengthValid = false;
   }
 
-  void OnDrawGizmos ()
-  {
-    if (_points.Count < 2)
-      return;
+  // void OnDrawGizmos ()
+  // {
+  //   if (_points.Count < 2)
+  //     return;
 
-    float increment = 1f / 10;
+  //   float increment = 1f / 10;
 
-    Gizmos.color = Color.white;
-    for (int i = 0; i < _points.Count - 1; ++i)
-    {
-      Vector3[] interpolateInput = GetInterpolateInput(i);
+  //   Gizmos.color = Color.white;
+  //   for (int i = 0; i < _points.Count - 1; ++i)
+  //   {
+  //     Vector3[] interpolateInput = GetInterpolateInput(i);
 
-      Vector3 a = interpolateInput[0];
-      for (float t = increment; t < 1f; t += increment)
-      {
-        Vector3 b = HermiteInterpolate(interpolateInput, t);
-        Gizmos.DrawLine(a, b);
-        a = b;
-      }
-      Gizmos.DrawLine(a, interpolateInput[1]);
-    }
-  }
+  //     Vector3 a = interpolateInput[0];
+  //     for (float t = increment; t < 1f; t += increment)
+  //     {
+  //       Vector3 b = HermiteInterpolate(interpolateInput, t);
+  //       Gizmos.DrawLine(a, b);
+  //       a = b;
+  //     }
+  //     Gizmos.DrawLine(a, interpolateInput[1]);
+  //   }
+  // }
 }
