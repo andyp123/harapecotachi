@@ -45,7 +45,7 @@ public class SubdividedPath : MonoBehaviour
   public PathPoint GetInterpolatedPointAtDistance (float distance)
   {
     if (_initialized)
-      debug.LogError("[SubdividedPath] Cannot get point from a path that has not been initialized.");
+      Debug.LogError("[SubdividedPath] Cannot get point from a path that has not been initialized.");
 
     distance = Mathf.Clamp(distance, 0f, _length);
     if (distance == 0f)
