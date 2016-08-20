@@ -324,26 +324,26 @@ public class Path : MonoBehaviour
     _lengthValid = false;
   }
 
-  // void OnDrawGizmos ()
-  // {
-  //   if (_points.Count < 2)
-  //     return;
+  void OnDrawGizmos ()
+  {
+    if (_points.Count < 2)
+      return;
 
-  //   float increment = 1f / 10;
+    float increment = 1f / 10;
 
-  //   Gizmos.color = Color.white;
-  //   for (int i = 0; i < _points.Count - 1; ++i)
-  //   {
-  //     Vector3[] interpolateInput = GetInterpolateInput(i);
+    Gizmos.color = Color.white;
+    for (int i = 0; i < _points.Count - 1; ++i)
+    {
+      Vector3[] interpolateInput = GetInterpolateInput(i);
 
-  //     Vector3 a = interpolateInput[0];
-  //     for (float t = increment; t < 1f; t += increment)
-  //     {
-  //       Vector3 b = HermiteInterpolate(interpolateInput, t);
-  //       Gizmos.DrawLine(a, b);
-  //       a = b;
-  //     }
-  //     Gizmos.DrawLine(a, interpolateInput[1]);
-  //   }
-  // }
+      Vector3 a = interpolateInput[0];
+      for (float t = increment; t < 1f; t += increment)
+      {
+        Vector3 b = HermiteInterpolate(interpolateInput, t);
+        Gizmos.DrawLine(a, b);
+        a = b;
+      }
+      Gizmos.DrawLine(a, interpolateInput[1]);
+    }
+  }
 }
