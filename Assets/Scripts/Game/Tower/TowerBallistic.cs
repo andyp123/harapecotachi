@@ -23,7 +23,8 @@ public class TowerBallistic : Tower
 
   void Awake ()
   {
-    _rangeIndicator.transform.localScale = Vector3.one * _range;
+    //_rangeIndicator.transform.localScale = Vector3.one * _range;
+    _rangeIndicator.SetActive(false);
     _sensor = gameObject.GetComponentInChildren<Sensor>();
     if (_sensor == null)
       Debug.LogError(string.Format("[TowerBallistic] Ballistic tower '{0}' is missing a sensor.", gameObject.name));

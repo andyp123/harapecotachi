@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         // build tower at node
         Transform nt = node.transform;
         Game.Instance.AssetManager.InstantiatePrefab(_towerType, nt.position, nt.rotation);
-        node._occupied = true;
+        node.PlaceObject();
         money.Value -= towerCost;
       }
       else
