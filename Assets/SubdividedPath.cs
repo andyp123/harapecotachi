@@ -29,7 +29,7 @@ public class SubdividedPath : MonoBehaviour
   // TODO: this is a horrible hack. The whole curve/path system will need a bit of a refactor soon.
   IEnumerator Initialize ()
   {
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(.1f);
 
     if (_path != null)
     {
