@@ -395,6 +395,6 @@ MonoBehaviour:
   _rotationSpeed: 180
   _shotArcHeightOffset: 1
   _shotDamage: 2
-  _shotDelay: 1
+  _shotDelay: 2
   _shotTimeToTarget: 1
   _shotInaccuracy: 0.1
