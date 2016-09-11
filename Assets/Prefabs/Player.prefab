@@ -58,6 +58,7 @@ GameObject:
   - 4: {fileID: 405566}
   - 114: {fileID: 11497570}
   - 54: {fileID: 5418788}
+  - 95: {fileID: 95000012722066250}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1068,7 +1069,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010713305536}
-  - 95: {fileID: 95000011243608726}
   m_Layer: 0
   m_Name: ModelSpaceRoot
   m_TagString: Untagged
@@ -5358,13 +5358,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013161419714}
   m_Mesh: {fileID: 4300000, guid: 62494aa673650244088970bda3b3f348, type: 3}
---- !u!95 &95000011243608726
+--- !u!95 &95000012722066250
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011189850188}
+  m_GameObject: {fileID: 141774}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b9f85db8d1a092a4ab2fd685baafb1c3, type: 3}
   m_Controller: {fileID: 9100000, guid: 5595e4cf604bfd2439eb11b97764c5f8, type: 2}

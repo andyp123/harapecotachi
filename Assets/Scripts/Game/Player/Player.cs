@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
   string _inputInteract;
   string _inputInventory;
 
+  Animator _animator;
+
   public void SetPlayerID (int id)
   {
     _inputXAxis = string.Format("P{0}_MoveX", id);
@@ -30,6 +32,8 @@ public class Player : MonoBehaviour
     _towerTypeData = GameData.GetStringData("TOWER_TYPE");
 
     _towerTypeData.Value = Localization.GetLocalizedText("LOC_ARROW");
+
+    _animator = gameObject.GetComponent<Animator>();
   }
   
   void Update ()
@@ -39,12 +43,18 @@ public class Player : MonoBehaviour
     Vector3 moveDir = new Vector3(moveX, 0f, moveZ);
     if (moveDir.sqrMagnitude > 1f)
       moveDir.Normalize();
+    else
+      _animator.SetFloat("Speed", 0f);
     transform.Translate(moveDir * _moveSpeed * Time.deltaTime, Space.World);
     if (moveDir.sqrMagnitude > 0f)
     {
       transform.rotation = Quaternion.LookRotation(moveDir);
+      _animator.Play("Walk");
     }
-
+    else
+    {
+      _animator.Play("Idle");
+    }
 
     if (Input.GetButtonDown(_inputInventory))
     {
