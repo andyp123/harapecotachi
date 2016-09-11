@@ -105,7 +105,7 @@ public class SubdividedPath : MonoBehaviour
       {
         float u = (float)j / subdivisionsWidth;
         float v = (float)i / (pointsLength - 1);
-        uvs.Add(new Vector2(u, v));
+        uvs.Add(new Vector2(v * _length / width, u));
 
         Vector3 vertex = start + (perpendicular * u * width);
         vertices.Add(vertex);
