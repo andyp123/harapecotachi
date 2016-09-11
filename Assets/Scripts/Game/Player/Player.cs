@@ -43,8 +43,6 @@ public class Player : MonoBehaviour
     Vector3 moveDir = new Vector3(moveX, 0f, moveZ);
     if (moveDir.sqrMagnitude > 1f)
       moveDir.Normalize();
-    else
-      _animator.SetFloat("Speed", 0f);
     transform.Translate(moveDir * _moveSpeed * Time.deltaTime, Space.World);
     if (moveDir.sqrMagnitude > 0f)
     {
