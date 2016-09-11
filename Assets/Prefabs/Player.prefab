@@ -59,6 +59,7 @@ GameObject:
   - 114: {fileID: 11497570}
   - 54: {fileID: 5418788}
   - 95: {fileID: 95000012722066250}
+  - 114: {fileID: 114000010443739952}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5375,6 +5376,26 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000010443739952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020966c141a94f346a7f728d77a0351b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _swapOnAwake: 0
+  _defaultMaterials:
+  - {fileID: 2100000, guid: 3ba68bd34d8c79442a89e2be75d60905, type: 2}
+  - {fileID: 2100000, guid: ce81c065d05c4f84682cf491883d25b4, type: 2}
+  - {fileID: 2100000, guid: a0eaed641e068da45981831254804315, type: 2}
+  _swapMaterials:
+  - {fileID: 2100000, guid: 694e4a97f16a2a847a32598cb148f643, type: 2}
+  - {fileID: 2100000, guid: ad36506520765694ca4c9a76d17b1089, type: 2}
+  - {fileID: 2100000, guid: c00189965f0fdb2428934567a78aa4a1, type: 2}
 --- !u!137 &137000010225593466
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

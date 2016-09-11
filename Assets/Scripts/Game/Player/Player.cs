@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
   public Sensor _objectPlacementSensor;
   public string _towerType = "ARROW_TOWER"; // TODO: add menu for selecting this
 
+
   GameData.Data<string> _towerTypeData;
 
   string _inputXAxis;
@@ -18,10 +19,15 @@ public class Player : MonoBehaviour
 
   public void SetPlayerID (int id)
   {
+    transform.name = "Player " + id;
+
     _inputXAxis = string.Format("P{0}_MoveX", id);
     _inputZAxis = string.Format("P{0}_MoveZ", id);
     _inputInteract = string.Format("P{0}_Interact", id);
     _inputInventory = string.Format("P{0}_Inventory", id);
+
+    if (id == 2)
+      gameObject.GetComponent<MaterialSwap>().SwapMaterials();
   }
 
   void Awake ()
