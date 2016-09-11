@@ -90,7 +90,7 @@ Material:
       second: 0
     - first:
         name: _FresnelPower
-      second: 5
+      second: 3
     - first:
         name: _GlossMapScale
       second: 1
@@ -137,6 +137,9 @@ Material:
     - first:
         name: _EmissionColor
       second: {r: 0.3897059, g: 0.9494929, b: 1, a: 1}
+    - first:
+        name: _FresnelOffset
+      second: {r: 0, g: 0.5, b: 0, a: 0}
     - first:
         name: _SpecularColor
       second: {r: 0.5948456, g: 0.77953017, b: 0.9338235, a: 1}

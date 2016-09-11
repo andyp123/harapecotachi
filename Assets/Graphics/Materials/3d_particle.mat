@@ -6,15 +6,21 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: player_1_helmet_glass
-  m_Shader: {fileID: 4800000, guid: e750bae14128858429f44d961f398b0c, type: 3}
-  m_ShaderKeywords: _EMISSION
+  m_Name: 3d_particle
+  m_Shader: {fileID: 4800000, guid: a1ec38759d17e0e42a43968595a00ee7, type: 3}
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
+    - first:
+        name: _Alpha
+      second:
+        m_Texture: {fileID: 2800000, guid: 765bc254ab9de874b87aac811334bd2f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - first:
         name: _BumpMap
       second:
@@ -58,6 +64,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
+        name: _Normal
+      second:
+        m_Texture: {fileID: 2800000, guid: 460d15cd692ee0f4e9e62873ee2a4b1d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
         name: _OcclusionMap
       second:
         m_Texture: {fileID: 0}
@@ -70,9 +82,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
-        name: _Ramp
+        name: _node_2399
       second:
-        m_Texture: {fileID: 2800000, guid: 7f5df4a1bf844004eba2f5ab06b5b7dc, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -87,10 +99,7 @@ Material:
       second: 1
     - first:
         name: _DstBlend
-      second: 0
-    - first:
-        name: _FresnelPower
-      second: 3
+      second: 10
     - first:
         name: _GlossMapScale
       second: 1
@@ -105,7 +114,7 @@ Material:
       second: 0
     - first:
         name: _Mode
-      second: 0
+      second: 3
     - first:
         name: _OcclusionStrength
       second: 1
@@ -119,27 +128,27 @@ Material:
         name: _SpecularHighlights
       second: 1
     - first:
-        name: _SpecularPower
-      second: 5.69
-    - first:
         name: _SrcBlend
       second: 1
     - first:
         name: _UVSec
       second: 0
     - first:
+        name: _UseLightColor
+      second: 0
+    - first:
         name: _ZWrite
-      second: 1
+      second: 0
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0.9558824, g: 0.92593837, b: 0.30492648, a: 1}
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _Color1
+      second: {r: 0.99201024, g: 0.99264705, b: 0.15327641, a: 1}
+    - first:
+        name: _Color2
+      second: {r: 1, g: 0.282, b: 0, a: 1}
     - first:
         name: _EmissionColor
-      second: {r: 0.3897059, g: 0.9494929, b: 1, a: 1}
-    - first:
-        name: _FresnelOffset
-      second: {r: 0, g: 0.5, b: 0, a: 0}
-    - first:
-        name: _SpecularColor
-      second: {r: 0.9338235, g: 0.82412183, b: 0.46597794, a: 1}
+      second: {r: 0, g: 0, b: 0, a: 1}

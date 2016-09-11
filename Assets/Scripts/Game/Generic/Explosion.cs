@@ -6,6 +6,7 @@ public class Explosion : MonoBehaviour
 {
   public float _damage = 2f;
   public bool _scaleDamageByDistance = true;
+  public GameObject _explosionPrefab;
 
   float _radius = 1f;
 
@@ -17,6 +18,8 @@ public class Explosion : MonoBehaviour
     SphereCollider collider = gameObject.GetComponent<SphereCollider>();
     _radius = collider.radius; // TODO: will I need other types of collider?
 
+    if (_explosionPrefab != null)
+      GameObject.Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
     StartCoroutine(Explode());
   }
 
