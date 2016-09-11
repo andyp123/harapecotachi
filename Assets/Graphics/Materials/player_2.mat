@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: player
+  m_Name: player_2
   m_Shader: {fileID: 4800000, guid: dc10b08f849ada24a84509f3da07799f, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
@@ -42,7 +42,7 @@ Material:
     - first:
         name: _Diffuse
       second:
-        m_Texture: {fileID: 2800000, guid: dd888894442b8bd499e49550acb3e231, type: 3}
+        m_Texture: {fileID: 2800000, guid: e59753a62d6b8084c839451f75d1e9d4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -117,7 +117,7 @@ Material:
       second: 1
     - first:
         name: _OutlineWidth
-      second: 7.5
+      second: 8
     - first:
         name: _Parallax
       second: 0.02
@@ -148,10 +148,10 @@ Material:
       second: {r: 0, g: 0, b: 0, a: 1}
     - first:
         name: _OutlineColor
-      second: {r: 0, g: 0, b: 0, a: 1}
+      second: {r: 0.096993946, g: 0.14370848, b: 0.19117647, a: 1}
     - first:
         name: _ShadowColor
-      second: {r: 0, g: 0, b: 0, a: 1}
+      second: {r: 0.096993946, g: 0.14370848, b: 0.19117647, a: 1}
     - first:
         name: _SpecularColor
       second: {r: 0.166, g: 0.166, b: 0.166, a: 1}

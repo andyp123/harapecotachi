@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: player_helmet_inner
+  m_Name: player_2_helmet_glass
   m_Shader: {fileID: 4800000, guid: e750bae14128858429f44d961f398b0c, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
@@ -120,7 +120,7 @@ Material:
       second: 1
     - first:
         name: _SpecularPower
-      second: 3.25
+      second: 5.69
     - first:
         name: _SrcBlend
       second: 1
@@ -133,10 +133,10 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0.44279847, g: 0.93465126, b: 0.9558824, a: 1}
+      second: {r: 0.389, g: 1, b: 0.70305395, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0.3897059, g: 0.9494929, b: 1, a: 1}
     - first:
         name: _SpecularColor
-      second: {r: 0.1684148, g: 0.6544118, b: 0.6544118, a: 1}
+      second: {r: 0.5948456, g: 0.77953017, b: 0.9338235, a: 1}
