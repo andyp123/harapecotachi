@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: player
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: dc10b08f849ada24a84509f3da07799f, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -40,6 +40,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
+        name: _Diffuse
+      second:
+        m_Texture: {fileID: 2800000, guid: dd888894442b8bd499e49550acb3e231, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
         name: _EmissionMap
       second:
         m_Texture: {fileID: 0}
@@ -69,7 +75,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Ramp
+      second:
+        m_Texture: {fileID: 2800000, guid: 7f5df4a1bf844004eba2f5ab06b5b7dc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - first:
+        name: _Ambient
+      second: 1
     - first:
         name: _BumpScale
       second: 1
@@ -101,6 +116,9 @@ Material:
         name: _OcclusionStrength
       second: 1
     - first:
+        name: _OutlineWidth
+      second: 7.5
+    - first:
         name: _Parallax
       second: 0.02
     - first:
@@ -109,6 +127,9 @@ Material:
     - first:
         name: _SpecularHighlights
       second: 1
+    - first:
+        name: _SpecularPower
+      second: 2
     - first:
         name: _SrcBlend
       second: 1
@@ -125,3 +146,12 @@ Material:
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _OutlineColor
+      second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _ShadowColor
+      second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _SpecularColor
+      second: {r: 0.166, g: 0.166, b: 0.166, a: 1}
