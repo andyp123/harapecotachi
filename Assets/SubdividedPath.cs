@@ -91,7 +91,8 @@ public class SubdividedPath : MonoBehaviour
 
     // TODO: these could easily be arrays for an imperceptable performance bump :D
     List<Vector3> vertices = new List<Vector3>(pointsLength * pointsWidth);
-    List<Vector2> uvs = new List<Vector2>(pointsLength * pointsWidth);
+    List<Vector2> uvs0 = new List<Vector2>(pointsLength * pointsWidth);
+    List<Vector2> uvs1 = new List<Vector2>(pointsLength * pointsWidth);
     List<int> triangles = new List<int>((pointsLength - 1) * subdivisionsWidth * 6); // 2 tris per quad, 3 verts per triangle
 
     // generate vertices and uvs
@@ -105,7 +106,8 @@ public class SubdividedPath : MonoBehaviour
       {
         float u = (float)j / subdivisionsWidth;
         float v = (float)i / (pointsLength - 1);
-        uvs.Add(new Vector2(v * _length / width, u));
+        uvs0.Add(new Vector2(v * _length / width, u));
+        uvs1.Add(new Vector2(v, u));
 
         Vector3 vertex = start + (perpendicular * u * width);
         vertices.Add(vertex);
@@ -129,7 +131,8 @@ public class SubdividedPath : MonoBehaviour
 
     // TODO: don't need to copy all the data if change list to array
     mesh.vertices = vertices.ToArray();
-    mesh.uv = uvs.ToArray();
+    mesh.uv = uvs0.ToArray();
+    mesh.uv2 = uvs1.ToArray();
     mesh.triangles = triangles.ToArray();
     mesh.RecalculateNormals();
   }
