@@ -1,0 +1,239 @@
+fileFormatVersion: 2
+guid: e64a5bd4c7344aa4c9b4def8b5955497
+timeCreated: 1473864638
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature
+    100002: fin_1a
+    100004: fin_1b
+    100006: fin_1b_end
+    100008: fin_2
+    100010: fin_2_end
+    100012: flipper.L
+    100014: flipper.L_end
+    100016: flipper.R
+    100018: flipper.R_end
+    100020: foot.L
+    100022: foot.R
+    100024: head
+    100026: lower_jaw
+    100028: lower_jaw_end
+    100030: lower_leg.L
+    100032: lower_leg.R
+    100034: //RootNode
+    100036: sand_skipper
+    100038: spine_a
+    100040: spine_b
+    100042: tail_a
+    100044: tail_b
+    100046: tail_c
+    100048: tail_c_end
+    100050: toe.L
+    100052: toe.L_end
+    100054: toe.R
+    100056: toe.R_end
+    100058: upper_jaw
+    100060: upper_jaw_end
+    100062: upper_leg.L
+    100064: upper_leg.R
+    100066: rig
+    400000: Armature
+    400002: fin_1a
+    400004: fin_1b
+    400006: fin_1b_end
+    400008: fin_2
+    400010: fin_2_end
+    400012: flipper.L
+    400014: flipper.L_end
+    400016: flipper.R
+    400018: flipper.R_end
+    400020: foot.L
+    400022: foot.R
+    400024: head
+    400026: lower_jaw
+    400028: lower_jaw_end
+    400030: lower_leg.L
+    400032: lower_leg.R
+    400034: sand_skipper
+    400036: //RootNode
+    400038: spine_a
+    400040: spine_b
+    400042: tail_a
+    400044: tail_b
+    400046: tail_c
+    400048: tail_c_end
+    400050: toe.L
+    400052: toe.L_end
+    400054: toe.R
+    400056: toe.R_end
+    400058: upper_jaw
+    400060: upper_jaw_end
+    400062: upper_leg.L
+    400064: upper_leg.R
+    400066: rig
+    4300000: sand_skipper
+    7400000: Armature|Walk
+    7400002: sand_skipper|Walk
+    7400004: rig|Walk
+    9500000: //RootNode
+    13700000: sand_skipper
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: rig|Walk
+      takeName: rig|Walk
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: rig
+        weight: 1
+      - path: rig/spine_a
+        weight: 1
+      - path: rig/spine_a/spine_b
+        weight: 1
+      - path: rig/spine_a/spine_b/flipper.L
+        weight: 1
+      - path: rig/spine_a/spine_b/flipper.L/flipper.L_end
+        weight: 1
+      - path: rig/spine_a/spine_b/flipper.R
+        weight: 1
+      - path: rig/spine_a/spine_b/flipper.R/flipper.R_end
+        weight: 1
+      - path: rig/spine_a/spine_b/head
+        weight: 1
+      - path: rig/spine_a/spine_b/head/fin_1a
+        weight: 1
+      - path: rig/spine_a/spine_b/head/fin_1a/fin_1b
+        weight: 1
+      - path: rig/spine_a/spine_b/head/fin_1a/fin_1b/fin_1b_end
+        weight: 1
+      - path: rig/spine_a/spine_b/head/fin_2
+        weight: 1
+      - path: rig/spine_a/spine_b/head/fin_2/fin_2_end
+        weight: 1
+      - path: rig/spine_a/spine_b/head/upper_jaw
+        weight: 1
+      - path: rig/spine_a/spine_b/head/upper_jaw/upper_jaw_end
+        weight: 1
+      - path: rig/spine_a/spine_b/lower_jaw
+        weight: 1
+      - path: rig/spine_a/spine_b/lower_jaw/lower_jaw_end
+        weight: 1
+      - path: rig/spine_a/tail_a
+        weight: 1
+      - path: rig/spine_a/tail_a/tail_b
+        weight: 1
+      - path: rig/spine_a/tail_a/tail_b/tail_c
+        weight: 1
+      - path: rig/spine_a/tail_a/tail_b/tail_c/tail_c_end
+        weight: 1
+      - path: rig/spine_a/upper_leg.L
+        weight: 1
+      - path: rig/spine_a/upper_leg.L/lower_leg.L
+        weight: 1
+      - path: rig/spine_a/upper_leg.L/lower_leg.L/foot.L
+        weight: 1
+      - path: rig/spine_a/upper_leg.L/lower_leg.L/foot.L/toe.L
+        weight: 1
+      - path: rig/spine_a/upper_leg.L/lower_leg.L/foot.L/toe.L/toe.L_end
+        weight: 1
+      - path: rig/spine_a/upper_leg.R
+        weight: 1
+      - path: rig/spine_a/upper_leg.R/lower_leg.R
+        weight: 1
+      - path: rig/spine_a/upper_leg.R/lower_leg.R/foot.R
+        weight: 1
+      - path: rig/spine_a/upper_leg.R/lower_leg.R/foot.R/toe.R
+        weight: 1
+      - path: rig/spine_a/upper_leg.R/lower_leg.R/foot.R/toe.R/toe.R_end
+        weight: 1
+      - path: sand_skipper
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
