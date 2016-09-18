@@ -6,6 +6,7 @@ public class Explosion : MonoBehaviour
 {
   public float _damage = 2f;
   public bool _scaleDamageByDistance = true;
+  public bool _spawnOnGround = false;
   public GameObject _explosionPrefab;
 
   float _radius = 1f;
@@ -19,7 +20,12 @@ public class Explosion : MonoBehaviour
     _radius = collider.radius; // TODO: will I need other types of collider?
 
     if (_explosionPrefab != null)
-      GameObject.Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+    {
+      Vector3 pos = transform.position;
+      if (_spawnOnGround)
+        pos.y = 0f;
+      GameObject.Instantiate(_explosionPrefab, pos, Quaternion.identity);
+    }
     StartCoroutine(Explode());
   }
 

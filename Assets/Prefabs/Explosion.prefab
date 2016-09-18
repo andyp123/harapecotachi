@@ -97,7 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 3
   _scaleDamageByDistance: 1
-  _explosionPrefab: {fileID: 1000013749394750, guid: 233e48e64b2b17943987a35c7a4ea9f2,
+  _spawnOnGround: 1
+  _explosionPrefab: {fileID: 1000014090966932, guid: 490449a4ba905d241a0e2017e916fb5a,
     type: 2}
 --- !u!135 &135000012532169636
 SphereCollider:
