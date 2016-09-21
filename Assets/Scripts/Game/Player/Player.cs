@@ -36,7 +36,6 @@ public class Player : MonoBehaviour
       Debug.LogError("No Object Placement Node Sensor on player");
 
     _towerTypeData = GameData.GetStringData("TOWER_TYPE");
-
     _towerTypeData.Value = Localization.GetLocalizedText("LOC_ARROW");
 
     _animator = gameObject.GetComponent<Animator>();
@@ -86,7 +85,7 @@ public class Player : MonoBehaviour
 
   void TryBuild ()
   {
-    int towerCost = 3; // TODO: this should be retrieved from tower data or something
+    int towerCost = (_towerType == "BOMB_TOWER") ? 50 : 30; // TODO: this should be retrieved from tower data or something
 
     GameData.Data<int> money = GameData.GetIntData("MONEY");
     if (money.Value < towerCost)
@@ -123,7 +122,7 @@ public class Player : MonoBehaviour
     {
       if (pickup._itemType == PickupItem.ItemType.Money)
       {
-        GameData.GetIntData("MONEY").Value += 1;
+        GameData.GetIntData("MONEY").Value += 10;
       }
       pickup.Collect();
     }

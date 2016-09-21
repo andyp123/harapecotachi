@@ -38,7 +38,7 @@ public class Game : Singleton<Game>
     GameData.AddIntData("SPAWNED", 0, 0);
     GameData.AddIntData("KILLED", 0, 0);
     GameData.AddIntData("CHANCES", 10, 10);
-    GameData.AddIntData("MONEY", 10, 10);
+    GameData.AddIntData("MONEY", 100, 100);
     GameData.AddStringData("TOWER_TYPE", "", "");
 
     Localization.LoadLocalizationFile();
