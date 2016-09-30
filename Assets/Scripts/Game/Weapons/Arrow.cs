@@ -14,6 +14,8 @@ public class Arrow : MonoBehaviour
     {
       DamageInfo info = new DamageInfo();
       info.baseDamage = _damage;
+      info.knockbackForce = _damage;
+      info.knockbackDir = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized;
       info.damageType = DamageType.Ballistic;
 
       damage.ApplyDamage(info);
