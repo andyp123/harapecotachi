@@ -142,6 +142,19 @@
           "text": "爆弾"
         }
       ]
+    },
+    {
+      "key": "LOC_COST",
+      "languages": [
+        {
+          "languageCode": "en",
+          "text": "Cost:"
+        },
+        {
+          "languageCode": "ja",
+          "text": "価格："
+        }
+      ]
     }
   ]
 }
