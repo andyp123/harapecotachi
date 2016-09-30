@@ -6,12 +6,12 @@ using System.Collections.Generic;
 
 public class GUIManager : MonoBehaviour
 {
-  Dictionary<string, Text> _localizedTextComponents;
+  Dictionary<string, List<Text>> _localizedTextComponents;
   Dictionary<string, GUISync.ValueInfo> _valueTextComponents;
 
   void Awake ()
   {
-    _localizedTextComponents = new Dictionary<string, Text>();
+    _localizedTextComponents = new Dictionary<string, List<Text>>();
     _valueTextComponents = new Dictionary<string, GUISync.ValueInfo>();
   }
 
@@ -22,15 +22,14 @@ public class GUIManager : MonoBehaviour
       string key = entry.Key;
       Text t = entry.Value;
 
-      if (!_localizedTextComponents.ContainsKey(key))
+      List<Text> textComponents = null;
+      if (!_localizedTextComponents.TryGetValue(key, out textComponents))
       {
-        _localizedTextComponents.Add(key, t);
-        t.text = Localization.GetLocalizedText(key);
+        textComponents = new List<Text>();
+        _localizedTextComponents.Add(key, textComponents);
       }
-      else
-      {
-        Debug.LogWarning(string.Format("[GUIManager] The string '{0}' is already in use. Skipping this object ({1}).", key, t.gameObject.name));
-      }
+      textComponents.Add(t);
+      t.text = Localization.GetLocalizedText(key);
     }
 
     foreach (KeyValuePair<string, GUISync.ValueInfo> entry in valueComponents)
@@ -55,12 +54,27 @@ public class GUIManager : MonoBehaviour
     foreach (KeyValuePair<string, Text> entry in localizedComponents)
     {      
       string key = entry.Key;
+      Text t = entry.Value;
 
-      if (_localizedTextComponents.ContainsKey(key))
+      List<Text> textComponents = null;
+      if (_localizedTextComponents.TryGetValue(key, out textComponents))
       {
-        _localizedTextComponents.Remove(key);
+        if (textComponents.Count <= 1) // remove entire list
+          _localizedTextComponents.Remove(key);
+        else // remove matching text component
+        {
+          for (int i = 0; i < textComponents.Count; ++i)
+          {
+            if (Object.ReferenceEquals(t, textComponents[i]))
+            {
+              textComponents.RemoveAt(i);
+              break;
+            }
+          }
+        }
       }
     }
+
     foreach (KeyValuePair<string, GUISync.ValueInfo> entry in valueComponents)
     {
       string key = entry.Key;
@@ -148,12 +162,16 @@ public class GUIManager : MonoBehaviour
     if (languageCode != null)
       Localization.SetCurrentLanguage(languageCode);
 
-    foreach(KeyValuePair<string, Text> entry in _localizedTextComponents)
+    foreach(KeyValuePair<string, List<Text>> entry in _localizedTextComponents)
     {
       string key = entry.Key;
-      Text t = entry.Value;
+      List<Text> textComponents = entry.Value;
 
-      t.text = Localization.GetLocalizedText(key);
+      string localizedText = Localization.GetLocalizedText(key);
+      foreach (Text t in textComponents)
+      {
+        t.text = localizedText;
+      }
     }
   }
 }
