@@ -1,0 +1,49 @@
+TD Ideas
+--------
+
+Platform
++ Nintendo Switch seems like a good system because of the apparent focus on local multi-player
+
+Coop
++ the game should be able to be played together or alone
++ a new player should be able to play with a much more skilled player and still feel useful
++ new players shouldn't be a burden to skilled players, but always able to help somehow
++ coop mode should take advantage of any peculiarities of Nintendo Switch if possible (and relevant)
++ there should be interactions that help players feel connected and want to work together
+  - tasks that require players to do things independently, then come together to finish (see overcooked)
+  - tasks that require constant cooperation from start to finish
+  - tasks where players feel connected by some easy and loose action that requires no skill (see tower levelling in monsters)
+  - tasks where players feel their independent action caused success or failure for the team
+
+Gameplay
++ could be simple defense game where you protect your base
++ could be attack style game where you push forward to destroy an opponent before they become too powerful
++ could have minions that are not under the player's direct control
+  - resource gatherers
+  - attackers (instead of towers)
+  - builders (build the towers for you, but can get killed by monsters)
++ How do monsters move?
+  - monsters could be glued to paths
+  - or follow paths loosely with some physical properties to allow them to be knocked around and slowed down
+  - they could follow the shape of the terrain (3d terrain?)
+  - or just flow in the shortest path toward their target (player base, presumably)
++ What movement types would monsters have?
+  - walking
+  - flying
+  - tunneling (need specific weapons to unearth them)
+  - swimming (need underwater towers to hurt them)
++ How are towers placed?
+  - can only build in designated spots (trees in monsters)
+  - can build almost anywhere (grid in many flash td)
+  - can build anywhere (free placement with perhaps simple tower to tower collision constraints)
+  - there are no towers, just minions
+
+
+World + Theme
+
+Customisation + Editor
++ very simple customisation of player characters through colour and some attachments such as replacement heads, hats etc.
++ a flag that the player can customise with a very simple editor
++ would love to have an in-game editor that can save and load custom levels
++ can build levels easily using a gamepad (or touch screen)
++ can switch theme by hitting a theme button (might require tweaking, but themes should be interchangeable)
