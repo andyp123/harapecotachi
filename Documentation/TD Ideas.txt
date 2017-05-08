@@ -37,6 +37,7 @@ Gameplay
   - can build almost anywhere (grid in many flash td)
   - can build anywhere (free placement with perhaps simple tower to tower collision constraints)
   - there are no towers, just minions
+  - players can carry towers around? break apart and move?
 
 
 World + Theme

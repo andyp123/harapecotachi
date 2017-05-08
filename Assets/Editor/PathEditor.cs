@@ -69,7 +69,7 @@ public class PathEditor : Editor
     float size = HandleUtility.GetHandleSize(point) * _handleScale;
     
     // first detect click
-    if ( Handles.Button(point, Quaternion.identity, size, size, Handles.DotCap) )
+    if ( Handles.Button(point, Quaternion.identity, size, size, Handles.DotHandleCap) )
     {
       _selectedPointIndex = index;
       Repaint();

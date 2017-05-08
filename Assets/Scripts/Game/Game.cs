@@ -59,7 +59,7 @@ public class Game : Singleton<Game>
     go.transform.parent = transform;
     _gameManager = go.AddComponent<GameManager>();
 
-    if (SceneManager.GetActiveScene().buildIndex == 0)
+    if (SceneManager.GetActiveScene().buildIndex == 0 && SceneManager.sceneCount > 1)
       SceneManager.LoadScene(1); // load the main scene (build index 1)
   }
 }
