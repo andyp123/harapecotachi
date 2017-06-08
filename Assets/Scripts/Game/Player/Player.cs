@@ -43,6 +43,8 @@ public class Player : MonoBehaviour
   
   void Update ()
   {
+    if (Time.timeScale == 0f)
+      return;
     float moveX = Input.GetAxis(_inputXAxis);
     float moveZ = Input.GetAxis(_inputZAxis);
     Vector3 moveDir = new Vector3(moveX, 0f, moveZ);
