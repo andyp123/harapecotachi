@@ -16,7 +16,7 @@ public class SerializationTest : MonoBehaviour
     Path[] paths = gameObject.GetComponentsInChildren<Path>();
     foreach (Path p in paths)
     {
-      json = JsonUtility.ToJson(p, true);
+      json = JsonUtility.ToJson(p, false);
       fileContent += json + ",\n";
     }
     fileContent += "],\n \"waves\": [\n";
@@ -24,7 +24,7 @@ public class SerializationTest : MonoBehaviour
     Wave[] waves = gameObject.GetComponentsInChildren<Wave>();
     foreach (Wave w in waves)
     {
-      json = JsonUtility.ToJson(w, true);
+      json = JsonUtility.ToJson(w, false);
       fileContent += json + ",\n";
     }
     fileContent += "]\n";
